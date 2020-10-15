@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   CDataTable,
   CButton,
@@ -7,111 +7,42 @@ import {
   CRow,
   CCol,
   CLink,
+  CPagination,
+  CFormGroup,
+  CLabel,
+  CSelect,
+  CSpinner,
 } from "@coreui/react";
+import Moment from "react-moment";
 import { getExperts } from "../../redux/actions/hostManagementActions";
 
 const fields = [
-  { key: "user_id", _style: { width: "2%" } },
-  { key: "name", _style: { width: "10%" } },
-  { key: "email_address", _style: { width: "5%" } },
-  { key: "category", _style: { width: "2%" } },
-  { key: "signup_date", _style: { width: "5%" } },
-  { key: "submission", _style: { width: "2%" } },
+  // { key: "userId", _style: { width: "2%" } },
+  { key: "name", _style: { width: "auto" } },
+  { key: "emailAddress", _style: { width: "auto" } },
+  { key: "category", _style: { width: "auto" } },
+  { key: "signupDate", _style: { width: "auto" } },
+  { key: "submission", _style: { width: "auto" } },
   {
     key: "action",
     label: "Action",
-    _style: { width: "30%" },
+    _style: { width: "auto" },
     sorter: false,
     filter: false,
   },
 ];
 
-const usersData = [
-  {
-    user_id: 1,
-    name: "John Doe",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 2,
-    name: "Samppa Nori",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 3,
-    name: "Estavan Lykos",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 4,
-    name: "Chetan Mohamed",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 5,
-    name: "Derick Maximinus",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 6,
-    name: "Friderik Dávid",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 7,
-    name: "Yiorgos Avraamu",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 8,
-    name: "Avram Tarasios",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 9,
-    name: "Quintin Ed",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-  {
-    user_id: 10,
-    name: "Enéas Kwadwo",
-    email_address: "kip@narola.email",
-    category: "Test",
-    signup_date: "05/05/2020",
-    submission: "2",
-  },
-];
+const defaultPage = 1;
+const defaultPageSize = 5;
 
 class HostManagement extends Component {
+  state = {
+    userData: [],
+    currentPage: 1,
+    currentPageSize: defaultPageSize,
+  };
   componentDidMount() {
-    this.props.dispatch(getExperts());
+    this.props.dispatch(getExperts(defaultPage, defaultPageSize));
   }
 
   approveStatus = (index) => {
@@ -127,112 +58,205 @@ class HostManagement extends Component {
     console.log("Edit and Approve!!!", index);
   };
 
+  onPaginationChange = (limit) => {
+    this.setState({ currentPageSize: limit });
+    this.props.dispatch(getExperts(this.state.currentPage, limit));
+  };
+
+  setActivePage = (i) => {
+    this.props.dispatch(getExperts(i, this.state.currentPageSize));
+    this.setState({ currentPage: i });
+  };
+
   render() {
-    console.log(this.props.hostData, "HostData");
     return (
       <div>
-        <CRow>
-          <CCol>
-            <CWidgetSimple
-              className="mr-3"
-              header="New Host Account Requests"
-              text="1,123"
-            ></CWidgetSimple>
-          </CCol>
-          <CCol>
-            <CWidgetSimple
-              className="mr-3"
-              header="In-Progress"
-              text="1,123"
-            ></CWidgetSimple>
-          </CCol>
-          <CCol>
-            <CWidgetSimple
-              header="Approved Host Accounts"
-              text="1,123"
-            ></CWidgetSimple>
-          </CCol>
-        </CRow>
-        <CDataTable
-          items={usersData}
-          // items={this.props.hostData.length > 0 ? this.props.hostData : []}
-          fields={fields}
-          // columnFilter
-          tableFilter
-          // footer
-          itemsPerPageSelect
-          itemsPerPage={5}
-          hover
-          sorter
-          pagination
-          scopedSlots={{
-            name: (item, index) => {
-              return (
-                <td className="py-2">
-                  <CLink href="http://localhost:3000/dashboard" target="_blank">
-                    {item.name}
-                  </CLink>
-                </td>
-              );
-            },
-            action: (item, index) => {
-              return (
-                <td className="py-2">
-                  <CButton
-                    variant="outline"
-                    size="sm"
-                    className="mr-1"
-                    style={{ color: "#fff", backgroundColor: "red" }}
-                    onClick={() => {
-                      this.approveStatus(index);
-                    }}
-                  >
-                    Approve
-                  </CButton>
-                  <CButton
-                    variant="outline"
-                    size="sm"
-                    className="mr-1"
-                    style={{ border: "1px solid #232333" }}
-                    onClick={() => {
-                      this.editandApproveStatus(index);
-                    }}
-                  >
-                    Edit and Approve
-                  </CButton>
-                  <CButton
-                    variant="outline"
-                    size="sm"
-                    className="mr-1"
-                    style={{ border: "1px solid #232333" }}
-                    onClick={() => {
-                      this.requestChangesStatus(index);
-                    }}
-                  >
-                    Request Changes
-                  </CButton>
-                  <CButton
-                    variant="outline"
-                    size="sm"
-                    style={{ border: "1px solid #232333" }}
-                    onClick={() => {
-                      this.notesStatus(index);
-                    }}
-                  >
-                    Notes
-                  </CButton>
-                </td>
-              );
-            },
-          }}
-        />
+        {this.props.loading ? (
+          <CSpinner size="sm" variant="grow" />
+        ) : (
+          <div>
+            <CRow>
+              <CCol>
+                <CWidgetSimple
+                  className="mr-3"
+                  header="New Host Account Requests"
+                  text={
+                    this.props.pendingPequest
+                      ? this.props.pendingPequest.toString()
+                      : "0"
+                  }
+                ></CWidgetSimple>
+              </CCol>
+              <CCol>
+                <CWidgetSimple
+                  className="mr-3"
+                  header="In-Progress"
+                  text={
+                    this.props.inProgressRequest
+                      ? this.props.inProgressRequest.toString()
+                      : "0"
+                  }
+                ></CWidgetSimple>
+              </CCol>
+              <CCol>
+                <CWidgetSimple
+                  header="Approved Host Accounts"
+                  text={
+                    this.props.approvedRequest
+                      ? this.props.approvedRequest.toString()
+                      : "0"
+                  }
+                ></CWidgetSimple>
+              </CCol>
+            </CRow>
+            <CFormGroup row>
+              <CCol xs="12" md="3" className="col-sm-4">
+                <CLabel htmlFor="selectSm">Sort By</CLabel>
+                <CSelect
+                  custom
+                  size="sm"
+                  className="select-box"
+                  name="selectSm"
+                  id="SelectLm"
+                >
+                  <option value="0">Sign up date</option>
+                  <option value="1"> 05/05/2020</option>
+                  <option value="2"> 05/05/2020</option>
+                  <option value="3"> 05/05/2020</option>
+                  <option value="4"> 05/05/2020</option>
+                  <option value="5"> 05/05/2020</option>
+                </CSelect>
+              </CCol>
+              <CCol xs="12" md="3" className="col-sm-4">
+                <CLabel htmlFor="selectSm">Filter by host recuiter</CLabel>
+                <CSelect
+                  custom
+                  size="sm"
+                  className="select-box"
+                  name="selectSm"
+                  id="SelectLm"
+                >
+                  <option value="0">All</option>
+                </CSelect>
+              </CCol>
+              <CCol xs="12" md="3" className="col-sm-4">
+                <CLabel htmlFor="selectSm">Filter by status</CLabel>
+                <CSelect
+                  custom
+                  size="sm"
+                  className="select-box"
+                  name="selectSm"
+                  id="SelectLm"
+                >
+                  <option value="0">All</option>
+                </CSelect>
+              </CCol>
+            </CFormGroup>
+
+            <CDataTable
+              items={this.props.hostData}
+              fields={fields}
+              tableFilter
+              itemsPerPageSelect
+              itemsPerPage={defaultPageSize}
+              hover
+              sorter
+              pagination={false}
+              onPaginationChange={(e) => this.onPaginationChange(e)}
+              scopedSlots={{
+                name: (item, index) => {
+                  return (
+                    <td className="py-2">
+                      <CLink
+                        href="http://localhost:3000/dashboard"
+                        target="_blank"
+                      >
+                        {item.name}
+                      </CLink>
+                    </td>
+                  );
+                },
+                signupDate: (item, index) => {
+                  return (
+                    <td className="py-2">
+                      <Moment format="DD/MM/YYYY">{item.signupDate}</Moment>
+                    </td>
+                  );
+                },
+                action: (item, index) => {
+                  return (
+                    <td className="py-2" style={{ whiteSpace: "nowrap" }}>
+                      <CButton
+                        variant="outline"
+                        size="sm"
+                        className="mr-2"
+                        style={{ color: "#fff", backgroundColor: "red" }}
+                        onClick={() => {
+                          this.approveStatus(index);
+                        }}
+                      >
+                        Approve
+                      </CButton>
+                      <CButton
+                        variant="outline"
+                        size="sm"
+                        className="mr-2"
+                        style={{ border: "1px solid #232333" }}
+                        onClick={() => {
+                          this.editandApproveStatus(index);
+                        }}
+                      >
+                        Edit and Approve
+                      </CButton>
+                      <CButton
+                        variant="outline"
+                        size="sm"
+                        className="mr-2"
+                        style={{ border: "1px solid #232333" }}
+                        onClick={() => {
+                          this.requestChangesStatus(index);
+                        }}
+                      >
+                        Request Changes
+                      </CButton>
+                      <CButton
+                        variant="outline"
+                        size="sm"
+                        style={{ border: "1px solid #232333" }}
+                        onClick={() => {
+                          this.notesStatus(index);
+                        }}
+                      >
+                        Notes
+                      </CButton>
+                    </td>
+                  );
+                },
+              }}
+            />
+            <div className={"mt-2"}>
+              <CPagination
+                activePage={this.state.currentPage}
+                pages={this.props.pages}
+                onActivePageChange={(i) => this.setActivePage(i)}
+              ></CPagination>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
-  return ({
-  hostData: state.hostManagement.hostData,
-})};
+  // console.log("State: ", state);
+  return {
+    hostData: state.hostManagement.hostData,
+    pages: state.hostManagement.pages,
+    tableLoading: state.hostManagement.loading,
+    inProgressRequest: state.hostManagement.inProgressRequest,
+    pendingPequest: state.hostManagement.pendingPequest,
+    approvedRequest: state.hostManagement.approvedRequest,
+  };
+};
 
 export default connect(mapStateToProps)(HostManagement);

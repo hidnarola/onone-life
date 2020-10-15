@@ -22,17 +22,19 @@ const TheHeader = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow);
 
   const toggleSidebar = () => {
-    const val = [true, "responsive"].includes(sidebarShow)
+    console.log("Sidebar")
+    // debugger;
+    const val = [true, 'responsive'].includes(sidebarShow)
       ? false
-      : "responsive";
-    dispatch({ type: "set", sidebarShow: val });
+      : 'responsive';
+    dispatch({ type: 'set', sidebarShow: val });
   };
 
   const toggleSidebarMobile = () => {
-    const val = [false, "responsive"].includes(sidebarShow)
+    const val = [false, 'responsive'].includes(sidebarShow)
       ? true
-      : "responsive";
-    dispatch({ type: "set", sidebarShow: val });
+      : 'responsive';
+    dispatch({ type: 'set', sidebarShow: val });
   };
 
   return (

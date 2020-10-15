@@ -4,18 +4,20 @@ const initialState = {
   hostData: [],
 };
 
-const hostManagementReducer = (state = initialState, { type, payload }) => {
+const hostManagementReducer = (state = initialState, { type, payload, pages, loading, inProgressRequest, pendingPequest, approvedRequest }) => {
   switch (type) {
     case GET_EXPERTS_DATA:
+      console.log("Payload: ", payload)
       return {
         ...state,
         hostData: payload,
+        pages,
+        loading,
+        inProgressRequest,
+        pendingPequest,
+        approvedRequest
       };
-    case "APPROVE_REQUEST":
-      return {
-        ...state,
-      };
-    default:
+      default:
       return state;
   }
 };

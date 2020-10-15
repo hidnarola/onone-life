@@ -1,4 +1,5 @@
-import React, { lazy } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
+import  { Redirect } from 'react-router-dom'
 import {
   CBadge,
   CButton,
@@ -14,12 +15,22 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-// import MainChartExample from '../charts/MainChartExample.js'
+import MainChartExample from '../charts/MainChartExample.js'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
+  const [redirctTo, setRedirctTo] = useState(false);
+  // useEffect(() => {
+  //   const token = JSON.parse(localStorage.getItem('AUTHTOKEN'))
+  //   if(!token){
+  //     setRedirctTo(true)
+  //  }
+  // }, []);
+  if(redirctTo){
+    return <Redirect to='/login'  />
+  } 
   return (
     <>
       <WidgetsDropdown />
@@ -50,7 +61,7 @@ const Dashboard = () => {
               </CButtonGroup>
             </CCol>
           </CRow>
-          {/* <MainChartExample style={{ height: '300px', marginTop: '40px' }} /> */}
+          <MainChartExample style={{ height: '300px', marginTop: '40px' }} />
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">

@@ -1,6 +1,35 @@
 // Here you can add other styles
 body {
   background-color: #e5e5e5;
+  .c-sidebar-nav {
+    li {
+      padding-bottom: 10px;
+    }
+  }
+  .c-main {
+    background-color: #f9f7f9;
+    .table {
+      background: #ffffff;
+      border: 1px solid #cbcbd8;
+      box-sizing: border-box;
+      th {
+        background: #cbcbd8;
+        border: 1px solid #b1b1c4;
+        box-sizing: border-box;
+      }
+      td {
+        background: #ffffff;
+        border: 1px solid #cbcbd8;
+        box-sizing: border-box;
+      }
+    }
+    .select-box {
+      background: #ffffff;
+      border: 1px solid #dedede;
+      box-sizing: border-box;
+      color: #ababab;
+    }
+  }
 }
 .login-header {
   text-align: center;
