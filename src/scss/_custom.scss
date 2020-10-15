@@ -1,0 +1,25 @@
+// Here you can add other styles
+body {
+  background-color: #e5e5e5;
+}
+.login-header {
+  text-align: center;
+  font-family: "Mulish", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+table.table {
+  thead {
+    th {
+      background-color: #e5e5e5;
+    }
+  }
+  tbody {
+    tr {
+      td {
+        background-color: #fff;
+      }
+    }
+  }
+}
