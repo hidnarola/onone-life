@@ -236,9 +236,9 @@ class HostManagement extends Component {
                 itemsPerPageSelect
                 itemsPerPage={defaultPageSize}
                 hover
-                sorter
-                pagination={false}
-                onPaginationChange={(e) => this.onPaginationChange(e)}
+                // sorter
+                pagination={true}
+                // onPaginationChange={(e) => this.onPaginationChange(e)}
                 scopedSlots={{
                   name: (item, index) => {
                     return (
@@ -310,13 +310,13 @@ class HostManagement extends Component {
                   },
                 }}
               />
-              <div className={"mt-2"}>
+              {/* <div className={"mt-2"}>
                 <CPagination
                   activePage={this.state.currentPage}
                   pages={this.props.pages}
                   onActivePageChange={(i) => this.setActivePage(i)}
                 ></CPagination>
-              </div>
+              </div> */}
             </div>
           )}
       </div>
