@@ -1,5 +1,5 @@
 import React, { lazy, useEffect, useState } from 'react'
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import {
   CBadge,
   CButton,
@@ -28,9 +28,9 @@ const Dashboard = () => {
   //     setRedirctTo(true)
   //  }
   // }, []);
-  if(redirctTo){
-    return <Redirect to='/login'  />
-  } 
+  if (redirctTo) {
+    return <Redirect to='/login' />
+  }
   return (
     <>
       <WidgetsDropdown />
