@@ -13,7 +13,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Member Management',
     to: '/admin/membermanagement',
-    icon: 'cil-user',
+    icon: 'cil-basket',
   },
   {
     _tag: 'CSidebarNavItem',
@@ -21,5 +21,48 @@ export default [
     to: '/admin/hostmanagement',
     icon: 'cil-user',
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Member Issue Resolution Center',
+    to: '/admin/memberissueresolution',
+    icon: 'cil-userFollow',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Event Listing Management',
+    to: '/admin/EventListingManagement',
+    icon: 'cil-people',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Payment In Management',
+    to: '/admin/PaymentInManagement',
+    icon: 'cil-bell',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'PayOut Management',
+    to: '/admin/PayOutManagement',
+    icon: 'cil-envelope-open',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Sales Analysis',
+    to: '/admin/SalesAnalysis',
+    icon: 'cil-task',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Account and Payments',
+    to: '/admin/AccountandPayments',
+    icon: 'cil-comment-square',
+  },
+
+
+
+
+
+
+
 ]
 

@@ -1,11 +1,15 @@
 // Here you can add other styles
 body {
   background-color: #e5e5e5;
-  .c-sidebar-nav {
-    li {
-      padding-bottom: 10px;
+  .c-sidebar {
+    width: 265px;
+    .c-sidebar-nav {
+      li {
+        padding-bottom: 10px;
+      }
     }
   }
+
   .c-main {
     background-color: #f9f7f9;
     .table {
