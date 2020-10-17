@@ -57,7 +57,24 @@ export default [
     to: '/admin/AccountandPayments',
     icon: 'cil-comment-square',
   },
-
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Marketings',
+    to: '/admin/Marketing',
+    icon: 'cil-settings',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Feedback and Rating Management',
+    to: '/admin/FeedbackandRatingManagement',
+    icon: 'cil-bell',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Email Templates Management',
+    to: '/admin/EmailTemplatesManagement',
+    icon: 'cil-task',
+  },
 
 
 
