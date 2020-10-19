@@ -2,6 +2,8 @@
 body {
   background-color: #e5e5e5;
   .c-sidebar {
+    background: linear-gradient(45deg, #082784, #0c0c0c) !important;
+    border-color: #fff !important;
     //  width: 20%;
     .c-sidebar-nav {
       li {
@@ -14,7 +16,13 @@ body {
   }
 
   .c-main {
-    background-color: #f9f7f9;
+    background-color: #f1f1f1;
+    .card {
+      border: 0;
+      box-shadow: 0 1px 1px 0 rgba(60, 75, 100, 0.14),
+        0 2px 1px -1px rgba(60, 75, 100, 0.12),
+        0 1px 3px 0 rgba(60, 75, 100, 0.2);
+    }
     .table {
       background: #ffffff;
       border: 1px solid #cbcbd8;
