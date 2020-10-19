@@ -2,10 +2,13 @@
 body {
   background-color: #e5e5e5;
   .c-sidebar {
-    width: 265px;
+    //  width: 20%;
     .c-sidebar-nav {
       li {
         padding-bottom: 10px;
+        a {
+          font-size: 0.79rem;
+        }
       }
     }
   }

@@ -20,6 +20,7 @@ const FinanceandAccounting = React.lazy(() => import('./views/FinanceandAccounti
 const VideoServerTokenTracker = React.lazy(() => import('./views/VideoServerTokenTracker/VideoServerTokenTracker'));
 const Localisation = React.lazy(() => import('./views/Localisation/Localisation'));
 const FeeManagement = React.lazy(() => import('./views/FeeManagement/FeeManagement'));
+const EmployeeAccessManagement = React.lazy(() => import('./views/EmployeeAccessManagement/EmployeeAccessManagement'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -42,6 +43,7 @@ const routes = [
   { path: '/admin/VideoServerTokenTracker', name: 'Video Server Token Tracker', component: VideoServerTokenTracker },
   { path: '/admin/Localisation', name: 'Localisation', component: Localisation },
   { path: '/admin/FeeManagement', name: 'Fee Management', component: FeeManagement },
+  { path: '/admin/EmployeeAccessManagement', name: 'Employee Access Management', component: EmployeeAccessManagement },
 ];
 
 export default routes;

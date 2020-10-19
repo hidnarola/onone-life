@@ -65,7 +65,7 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Feedback and Rating Management',
+    name: 'Feedback & Rating Management',
     to: '/admin/FeedbackandRatingManagement',
     icon: 'cil-bell',
   },
@@ -105,7 +105,12 @@ export default [
     to: '/admin/FeeManagement',
     icon: 'cilHome',
   },
-
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Employee Access Management',
+    to: '/admin/EmployeeAccessManagement',
+    icon: 'cilListRich',
+  },
 
 
 ]
