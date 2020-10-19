@@ -15,6 +15,12 @@ const AccountandPayments = React.lazy(() => import('./views/AccountandPayments/A
 const Marketing = React.lazy(() => import('./views/Marketing/Marketing'));
 const FeedbackandRatingManagement = React.lazy(() => import('./views/FeedbackandRatingManagement/FeedbackandRatingManagement'));
 const EmailTemplatesManagement = React.lazy(() => import('./views/EmailTemplatesManagement/EmailTemplatesManagement'));
+const WebPageDesign = React.lazy(() => import('./views/WebPageDesign/WebPageDesign'));
+const FinanceandAccounting = React.lazy(() => import('./views/FinanceandAccounting/FinanceandAccounting'));
+const VideoServerTokenTracker = React.lazy(() => import('./views/VideoServerTokenTracker/VideoServerTokenTracker'));
+const Localisation = React.lazy(() => import('./views/Localisation/Localisation'));
+const FeeManagement = React.lazy(() => import('./views/FeeManagement/FeeManagement'));
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
@@ -31,6 +37,11 @@ const routes = [
   { path: '/admin/Marketing', name: 'Marketing', component: Marketing },
   { path: '/admin/FeedbackandRatingManagement', name: 'Feedback and Rating Management', component: FeedbackandRatingManagement },
   { path: '/admin/EmailTemplatesManagement', name: 'Email Templates Management', component: EmailTemplatesManagement },
+  { path: '/admin/WebPageDesign', name: 'Web Page Design', component: WebPageDesign },
+  { path: '/admin/FinanceandAccounting', name: 'Finance and Accounting', component: FinanceandAccounting },
+  { path: '/admin/VideoServerTokenTracker', name: 'Video Server Token Tracker', component: VideoServerTokenTracker },
+  { path: '/admin/Localisation', name: 'Localisation', component: Localisation },
+  { path: '/admin/FeeManagement', name: 'Fee Management', component: FeeManagement },
 ];
 
 export default routes;

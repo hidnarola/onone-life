@@ -75,9 +75,36 @@ export default [
     to: '/admin/EmailTemplatesManagement',
     icon: 'cil-task',
   },
-
-
-
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Web Page Design',
+    to: '/admin/WebPageDesign',
+    icon: 'cil-lock-locked',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Finance and Accounting',
+    to: '/admin/FinanceandAccounting',
+    icon: 'cil-credit-card',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Video Server Token Tracker',
+    to: '/admin/VideoServerTokenTracker',
+    icon: 'cilCheckCircle',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Localisation',
+    to: '/admin/Localisation',
+    icon: 'cilHome',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Fee Management',
+    to: '/admin/FeeManagement',
+    icon: 'cilHome',
+  },
 
 
 
