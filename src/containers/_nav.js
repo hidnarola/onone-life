@@ -112,6 +112,20 @@ export default [
     icon: 'cilListRich',
   },
 
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Category Management',
+    to: '/admin/CategoryManagement',
+    icon: 'cilLayers',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Blog Post Management',
+    to: '/admin/BlogPostManagement',
+    icon: 'cilPrint',
+  },
+
+
 
 ]
 

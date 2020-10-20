@@ -21,6 +21,8 @@ const VideoServerTokenTracker = React.lazy(() => import('./views/VideoServerToke
 const Localisation = React.lazy(() => import('./views/Localisation/Localisation'));
 const FeeManagement = React.lazy(() => import('./views/FeeManagement/FeeManagement'));
 const EmployeeAccessManagement = React.lazy(() => import('./views/EmployeeAccessManagement/EmployeeAccessManagement'));
+const CategoryManagement = React.lazy(() => import('./views/Categorymanagement/Categorymanagement'));
+const BlogPostManagement = React.lazy(() => import('./views/BlogPostManagement/BlogPostManagement'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -44,6 +46,8 @@ const routes = [
   { path: '/admin/Localisation', name: 'Localisation', component: Localisation },
   { path: '/admin/FeeManagement', name: 'Fee Management', component: FeeManagement },
   { path: '/admin/EmployeeAccessManagement', name: 'Employee Access Management', component: EmployeeAccessManagement },
+  { path: '/admin/CategoryManagement', name: 'Category management', component: CategoryManagement },
+  { path: '/admin/BlogPostManagement', name: 'Blog Post Management', component: BlogPostManagement },
 ];
 
 export default routes;

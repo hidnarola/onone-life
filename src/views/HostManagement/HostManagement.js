@@ -278,6 +278,16 @@ class HostManagement extends Component {
                           size="sm"
                           className="mr-2"
                           style={{ border: "1px solid #232333" }}
+
+                        >
+                          View Experts details
+                      </CButton>
+
+                        <CButton
+                          variant="outline"
+                          size="sm"
+                          className="mr-2"
+                          style={{ border: "1px solid #232333" }}
                           onClick={() => {
                             this.editandApproveStatus(index);
                           }}

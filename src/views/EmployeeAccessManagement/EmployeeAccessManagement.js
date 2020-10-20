@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import {
-    CCardBody,
+
     CDataTable,
-    CButton,
-    CCollapse,
-    CLink,
     CRow,
     CCol,
-    CWidgetSimple
 } from "@coreui/react";
 
 const fields = [
