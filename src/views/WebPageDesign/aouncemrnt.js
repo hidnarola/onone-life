@@ -1,48 +1,65 @@
-import CKEditor from 'ckeditor4-react';
-import { connect } from "react-redux";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
+
     CButton,
+
     CCol,
+
     CFormGroup,
     CLabel,
+
+    CModal,
+
+    CModalBody,
+    CModalFooter,
+    CTextarea,
+    CModalHeader
+
 } from "@coreui/react";
 
 
 
 
 
-class ChangePage extends Component {
+
+
+
+class ANNOUNCEMENT extends Component {
+
+
     render() {
         return (
-            <>
-                <div className="App">
-                    <CCol xs="12" sm="12">
-                        <CFormGroup row>
-                            <CCol xs="12" md="12" className='text-right'>
-                                <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
-                                <CButton
-                                    variant="outline"
-                                    size="sm"
-                                    height='15px'
-
-                                    style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
-                                    onClick={this.props.showForm}
-                                > Back</CButton>
-
-                            </CCol>
-                        </CFormGroup>
-                    </CCol>
-
-                    <CKEditor
+            <div>
 
 
 
-                        data={'Here you can change page content..'}
+                <CModal
+                    show={this.props.Announcement}
+                    onClose={this.props.AnnouncementModal}
+                >
+                    <CModalHeader closeButton>Add Announcement</CModalHeader>
+                    <CModalBody>
+                        <CCol xs="10">
+                            <CFormGroup>
+                                <CLabel htmlFor="date">AnnouncementModal</CLabel>
+                                <CTextarea id="date" type='text' style={{ width: "433px" }} />
+                            </CFormGroup>
+                        </CCol>
+                    </CModalBody>
+                    <CModalFooter>
+                        <CButton color="primary" onClick={this.props.AnnouncementModal}>Continue</CButton>{' '}
+                        <CButton
+                            color="secondary"
+                            onClick={this.props.AnnouncementModal}
+                        >Cancel</CButton>
+                    </CModalFooter>
+                </CModal>
 
-                    />
-                </div>
-            </>
+
+            </div>
+
+
         );
     }
 }
@@ -52,4 +69,5 @@ const mapStateToProps = (state) => {
 
     };
 };
-export default connect(mapStateToProps)(ChangePage);
+
+export default connect(mapStateToProps)(ANNOUNCEMENT);

@@ -34,9 +34,9 @@ class WebPageDesign extends Component {
     AnnouncementModal = () => {
         this.setState({ Announcement: !this.state.Announcement })
     }
-    ChangeCotentpage = () => {
-        this.setState({ ChangeCotent: !this.state.ChangeCotent })
-    }
+    // ChangeCotentpage = () => {
+    //     this.setState({ ChangeCotent: !this.state.ChangeCotent })
+    // }
 
 
 
