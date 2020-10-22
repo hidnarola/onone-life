@@ -12,10 +12,14 @@ import {
     CLabel,
     CSelect,
     CSpinner,
+    CCard,
+  CCardBody,
+  CCollapse,
+  CCardHeader, CInput,
 } from "@coreui/react";
 import Moment from "react-moment";
 import { getExperts } from "../../redux/actions/hostManagementActions";
-
+import RequestExpert from '../requestExpert/requestExpert'
 const fields = [
     // { key: "userId", _style: { width: "2%" } },
     { key: "Username" },
@@ -115,12 +119,17 @@ class EventListingmanagement extends Component {
         userData: [],
         currentPage: 1,
         currentPageSize: defaultPageSize,
+        OpenRequest: false,
+        formShow: false,
     };
     componentDidMount() {
         this.props.dispatch(getExperts(defaultPage, defaultPageSize));
     }
 
 
+    showForm = () => {
+        this.setState({ formShow: !this.state.formShow })
+      }
 
     approveStatus = (index) => {
         console.log("Approved!!!", index);
@@ -145,6 +154,10 @@ class EventListingmanagement extends Component {
         this.setState({ currentPage: i });
     };
 
+    OpenRequestModal = () => {
+        this.setState({ OpenRequest: !this.state.OpenRequest })
+    }
+
     render() {
         return (
             <div>
@@ -152,129 +165,230 @@ class EventListingmanagement extends Component {
                     <CSpinner size="sm" variant="grow" />
                 ) : (
                         <div>
-                            <CRow>
-                                <CCol>
-                                    <h4>Event Listing Management</h4>
-                                </CCol>
+                            {!this.state.formShow ? (
+                                <>
+                                    <CRow>
+                                        <CCol>
+                                            <h4>Event Listing Management</h4>
+                                        </CCol>
 
-                            </CRow>
-                            <CFormGroup row>
-                                <CCol xs="12" md="3">
-                                    <CLabel htmlFor="selectSm">Sort By</CLabel>
-                                    <CSelect
-                                        custom
-                                        size="sm"
-                                        className="select-box"
-                                        name="selectSm"
-                                        id="SelectLm"
-                                    >
-                                        <option value="0">Date</option>
-                                        <option value="1"> 05/05/2020</option>
-                                        <option value="2"> 05/05/2020</option>
-                                        <option value="3"> 05/05/2020</option>
-                                        <option value="4"> 05/05/2020</option>
-                                        <option value="5"> 05/05/2020</option>
-                                    </CSelect>
+                                    </CRow>
+                                    <CFormGroup row>
+                                        <CCol xs="12" md="3">
+                                            <CLabel htmlFor="selectSm">Sort By status</CLabel>
+                                            <CSelect
+                                                custom
+                                                size="sm"
+                                                className="select-box"
+                                                name="selectSm"
+                                                id="SelectLm"
+                                            >
+                                                <option value="0">select</option>
+                                                <option value="1"> Approved</option>
+                                                <option value="2"> In-progress</option>
+                                                <option value="3"> Rejected</option>
+                                               
+                                            </CSelect>
 
 
-                                </CCol>
+                                        </CCol>
 
-                                <CCol xs="12" md="9" className='text-right'>
-                                    <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
-                                    <CButton
-                                        variant="outline"
-                                        size="sm"
-                                        height='15px'
-                                        className="mr-2"
-                                        style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
+                                        <CCol xs="12" md="9" className='text-right'>
+                                            <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
+                                            <CButton
+                                                variant="outline"
+                                                size="sm"
+                                                height='15px'
+                                                className="mr-2"
+                                                style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
+                                                onClick={() => {
+                                                    this.showForm();
+                                                }}  
+                                            > New Listing Requests</CButton>
+                                            <CButton
+                                                variant="outline"
+                                                size="sm"
+                                                height='15px'
+                                                className="mr-2"
+                                                style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
 
-                                    > New Listing Requests</CButton>
-                                    <CButton
-                                        variant="outline"
-                                        size="sm"
-                                        height='15px'
-                                        className="mr-2"
-                                        style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
+                                            >  Listing </CButton>
+                                        </CCol>
 
-                                    >  Listing </CButton>
-                                </CCol>
+                                    </CFormGroup>
 
-                            </CFormGroup>
+                                    <CDataTable
+                                        items={usersData}
+                                        fields={fields}
+                                        // tableFilter
+                                        // itemsPerPageSelect
+                                        // itemsPerPage={defaultPageSize}
+                                        hover
+                                        // sorter
+                                        pagination={true}
+                                        // onPaginationChange={(e) => this.onPaginationChange(e)}
+                                        scopedSlots={{
+                                            name: (item, index) => {
+                                                return (
+                                                    <td className="py-2">
+                                                        <CLink
+                                                            href="#"
+                                                            target="_blank"
+                                                        >
+                                                            {item.name}
+                                                        </CLink>
+                                                    </td>
+                                                );
+                                            },
+                                            signupDate: (item, index) => {
+                                                return (
+                                                    <td className="py-2">
+                                                        <Moment format="DD/MM/YYYY">{item.signupDate}</Moment>
+                                                    </td>
+                                                );
+                                            },
+                                            action: (item, index) => {
+                                                return (
+                                                    <td className="py-2" style={{ whiteSpace: "nowrap" }}>
+                                                        <CButton
+                                                            variant="outline"
+                                                            size="sm"
+                                                            className="mr-2"
+                                                            style={{ color: "#fff", backgroundColor: "red" }}
 
-                            <CDataTable
-                                items={usersData}
-                                fields={fields}
-                                // tableFilter
-                                // itemsPerPageSelect
-                                // itemsPerPage={defaultPageSize}
-                                hover
-                                // sorter
-                                pagination={true}
-                                // onPaginationChange={(e) => this.onPaginationChange(e)}
-                                scopedSlots={{
-                                    name: (item, index) => {
-                                        return (
-                                            <td className="py-2">
-                                                <CLink
-                                                    href="#"
-                                                    target="_blank"
-                                                >
-                                                    {item.name}
-                                                </CLink>
-                                            </td>
-                                        );
-                                    },
-                                    signupDate: (item, index) => {
-                                        return (
-                                            <td className="py-2">
-                                                <Moment format="DD/MM/YYYY">{item.signupDate}</Moment>
-                                            </td>
-                                        );
-                                    },
-                                    action: (item, index) => {
-                                        return (
-                                            <td className="py-2" style={{ whiteSpace: "nowrap" }}>
-                                                <CButton
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="mr-2"
-                                                    style={{ color: "#fff", backgroundColor: "red" }}
-
-                                                >
-                                                    Approve
+                                                        >
+                                                            Approve
                       </CButton>
-                                                <CButton
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="mr-2"
-                                                    style={{ border: "1px solid #232333" }}
-
-                                                >
-                                                    Request Amendment
+                                                        <CButton
+                                                            variant="outline"
+                                                            size="sm"
+                                                            className="mr-2"
+                                                            style={{ border: "1px solid #232333" }}
+                                                            onClick={() => {
+                                                                this.OpenRequestModal();
+                                                            }}
+                                                        >
+                                                            Request Amendment
                       </CButton>
-                                                <CButton
-                                                    variant="outline"
-                                                    size="sm"
-                                                    className="mr-2"
-                                                    style={{ border: "1px solid #232333" }}
-
-                                                >
-                                                    Edit and Approve
+                                                        <CButton
+                                                            variant="outline"
+                                                            size="sm"
+                                                            className="mr-2"
+                                                            style={{ border: "1px solid #232333" }}
+                                                            onClick={() => {
+                                                                this.showForm();
+                                                            }}  
+                                                        >
+                                                            Edit and Approve
                       </CButton>
-                                            </td>
-                                        );
-                                    },
-                                }}
-                            />
-                            {/* <div className={"mt-2"}>
+                                                    </td>
+                                                );
+                                            },
+                                        }}
+                                    />
+                                    {/* <div className={"mt-2"}>
                 <CPagination
                   activePage={this.state.currentPage}
                   pages={this.props.pages}
                   onActivePageChange={(i) => this.setActivePage(i)}
                 ></CPagination>
               </div> */}
+                                </>
+                            ) : (
+                                <CCol xs="12" sm="12">
+ <CFormGroup row>
+                          <CCol xs="12" md="12" className='text-right'>
+                            <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
+                            <CButton
+                              variant="outline"
+                              size="sm"
+                              height='15px'
+                            
+                              style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
+                              onClick={this.showForm}
+                            > Back</CButton>
+
+                          </CCol>
+                        </CFormGroup>
+                    <CCard>
+                      <CCardHeader>
+                      Event Listing Management
+                 
+                      </CCardHeader>
+                      <CCardBody>
+                        <CFormGroup>
+                          <CLabel htmlFor="company">User Name</CLabel>
+                          <CInput id="company" placeholder="Enter your user name" />
+                        </CFormGroup>
+                       
+                        <CFormGroup>
+                          <CLabel htmlFor="Category">Category</CLabel>
+                          <CInput id="Category" placeholder="Enter Category name" />
+                                                </CFormGroup>
+                                                <CFormGroup>
+                          <CLabel htmlFor="vat">status </CLabel>
+                          <CSelect
+                                custom
+                                size="sm"
+                                className="select-box"
+                                name="selectSm"
+                                id="SelectLm"
+                              >
+                                <option value="">Status</option>
+                                <option value="0">Approved</option>
+                                                        <option value="1">In-progress</option>
+                                                        <option value="1">Rejected</option>
+                              </CSelect>
+                        </CFormGroup>
+                        <CFormGroup row className="my-0">
+                          <CCol xs="8">
+                            <CFormGroup>
+
+                              <CLabel htmlFor="selectSm">submission</CLabel>
+                              <CSelect
+                                custom
+                                size="sm"
+                                className="select-box"
+                                name="selectSm"
+                                id="SelectLm"
+                              >
+                                <option value="">submission</option>
+                                <option value="0">Approved</option>
+                                <option value="1">Decline</option>
+                              </CSelect>
+                            </CFormGroup>
+                          </CCol>
+                          <CCol xs="4">
+                            <CFormGroup>
+                              <CLabel htmlFor="date">Requested date</CLabel>
+                              <CInput id="date" type='date' />
+                            </CFormGroup>
+                          </CCol>
+                          <CCol xs="4">
+
+                          </CCol>
+                        </CFormGroup>
+                        <CFormGroup row>
+                          <CCol xs="12" md="12" className='text-right'>
+                            <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
+                            <CButton
+                              variant="outline"
+                              size="sm"
+                              height='15px'
+                              className="mr-2"
+                              style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
+                              onClick={this.showForm}
+                            > Submit</CButton>
+
+                          </CCol>
+                        </CFormGroup>
+                      </CCardBody>
+                    </CCard>
+                  </CCol>     
+                            )}
                         </div>
                     )}
+                <RequestExpert OpenRequest={this.state.OpenRequest} OpenRequestModal={this.OpenRequestModal} />
             </div>
         );
     }

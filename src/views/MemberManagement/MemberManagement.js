@@ -233,12 +233,7 @@ class MemberManagement extends Component {
                       Total Value of All Transactions : -
                   </p>
                     <p className="text-muted">Landing Page Link : -</p>
-                    {/* <CButton size="sm" color="info">
-                                            User Settings
-                                        </CButton>
-                                        <CButton size="sm" color="danger" className="ml-1">
-                                            Delete
-                                        </CButton> */}
+
                   </CCardBody>
                 </CCollapse>
               );

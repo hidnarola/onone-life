@@ -7,7 +7,13 @@ import {
     CLink,
     CRow,
     CCol,
-    CWidgetSimple
+    CWidgetSimple,
+    CModal,
+    CModalTitle,
+    CModalBody,
+    CModalFooter,
+    CTextarea,
+    CModalHeader
 } from "@coreui/react";
 
 const fields = [
@@ -33,25 +39,14 @@ const usersData = [
 
 class AccountandPayments extends Component {
     state = {
-        details: [],
+
+        setModal: false,
     };
 
-    toggleDetails = (index) => {
-        const position = this.state.details.indexOf(index);
-        let newDetails = this.state.details.slice();
-        if (position !== -1) {
-            newDetails.splice(position, 1);
-        } else {
-            newDetails = [...this.state.details, index];
-        }
-        // setDetails(newDetails);
-        this.setState({ details: newDetails });
-    };
 
-    resetPassword = (index) => {
-        console.log("Password Reset Clicked!!!", index);
-    };
-
+    toggle = () => {
+        this.setState({ setModal: !this.state.setModal })
+    }
     render() {
         return (
             <>
@@ -115,12 +110,18 @@ class AccountandPayments extends Component {
                         Issue_Warning_1: (item, index) => {
                             return (
                                 <td className="py-2">
-                                    <CLink>
+                                    <CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Auto warn &nbsp;
-                                    </CLink><CLink>
+                                    </CLink><CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Warn Now  &nbsp;
                                     </CLink>
-                                    <CLink>
+                                    <CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Notice Sent
                                     </CLink>
                                 </td>
@@ -129,12 +130,18 @@ class AccountandPayments extends Component {
                         Issue_Warning_2: (item, index) => {
                             return (
                                 <td className="py-2">
-                                    <CLink>
+                                    <CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Auto warn  &nbsp;
-                                    </CLink><CLink>
+                                    </CLink><CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Warn Now  &nbsp;
                                     </CLink>
-                                    <CLink>
+                                    <CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Notice Sent
                                     </CLink>
                                 </td>
@@ -143,12 +150,18 @@ class AccountandPayments extends Component {
                         Issue_Warning_3: (item, index) => {
                             return (
                                 <td className="py-2">
-                                    <CLink>
+                                    <CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Auto warn  &nbsp;
-                                    </CLink><CLink>
+                                    </CLink><CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Warn Now  &nbsp;
                                     </CLink>
-                                    <CLink>
+                                    <CLink onClick={() => {
+                                        this.toggle();
+                                    }}>
                                         Notice Sent
                                     </CLink>
                                 </td>
@@ -158,6 +171,24 @@ class AccountandPayments extends Component {
                     }}
 
                 />
+                <CModal
+                    show={this.state.setModal}
+                    onClose={this.toggle}
+                >
+                    <CModalHeader closeButton>Warnings</CModalHeader>
+                    <CModalBody>
+                        <CCol xs="10">
+                            <p>Are you sure tou want to set a warning ?  </p>
+                        </CCol>
+                    </CModalBody>
+                    <CModalFooter>
+                        <CButton color="primary" onClick={this.toggle}>Yes</CButton>{' '}
+                        <CButton
+                            color="secondary"
+                            onClick={this.toggle}
+                        >Cancel</CButton>
+                    </CModalFooter>
+                </CModal>
             </>
         );
     }

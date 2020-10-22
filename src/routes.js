@@ -23,6 +23,8 @@ const FeeManagement = React.lazy(() => import('./views/FeeManagement/FeeManageme
 const EmployeeAccessManagement = React.lazy(() => import('./views/EmployeeAccessManagement/EmployeeAccessManagement'));
 const CategoryManagement = React.lazy(() => import('./views/Categorymanagement/Categorymanagement'));
 const BlogPostManagement = React.lazy(() => import('./views/BlogPostManagement/BlogPostManagement'));
+const ManageQuotes = React.lazy(() => import('./views/ManageQuotes/ManageQuotes'));
+const Giftcards = React.lazy(() => import('./views/Giftcards/Giftcards'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -48,6 +50,8 @@ const routes = [
   { path: '/admin/EmployeeAccessManagement', name: 'Employee Access Management', component: EmployeeAccessManagement },
   { path: '/admin/CategoryManagement', name: 'Category management', component: CategoryManagement },
   { path: '/admin/BlogPostManagement', name: 'Blog Post Management', component: BlogPostManagement },
+  { path: '/admin/ManageQuotes', name: 'Manage Quotes', component: ManageQuotes },
+  { path: '/admin/Giftcards', name: 'Gift cards/ discounts for admin to issue by category or to specific users etc', component: Giftcards },
 ];
 
 export default routes;

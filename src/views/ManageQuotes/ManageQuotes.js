@@ -4,14 +4,15 @@ import {
     CDataTable,
     CRow,
     CCol,
-    CLabel,
-    CButton,
     CFormGroup,
     CSelect,
+    CLabel,
+    CButton,
+    CInput,
     CCard,
   CCardBody,
   CCollapse,
-    CCardHeader, CInput,
+    CCardHeader,
     CModal,
   CModalTitle,
   CModalBody,
@@ -19,14 +20,11 @@ import {
   CTextarea,
   CModalHeader
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+
 
 const fields = [
-    { key: "Category_name", label: 'Category Name' },
-    { key: "Category_type", label: 'Category type' },
-    { key: "Main_category", label: 'Main category' },
-    { key: "Sub_category", label: 'Sub category' },
-    { key: "category_icon", label: 'category Icon' },
+    { key: "Description", label: 'Description' },
+    { key: "Author_name", label: 'Author Name' },
     { key: "action", label: "Action" },
 
 
@@ -34,80 +32,51 @@ const fields = [
 
 const usersData = [
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Sophia",
+
 
 
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Isabella",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Sophia",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Olivia",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Jacob",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Mason",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "William",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Sophia",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Olivia",
     },
     {
-        Category_name: "SL012356",
-        Category_type: "Main category",
-        Main_category: "topic",
-        Sub_category: "Sub category",
-        category_icon: "Marketing",
+        Description: "approved user settings",
+        Author_name: "Jayden",
     },
 ];
 
-class CategoryManagement extends Component {
+class ManageQuotes extends Component {
     state = {
         formShow: false,
         setModal: false,
@@ -125,28 +94,26 @@ class CategoryManagement extends Component {
             <>
                 <CRow>
                     <CCol>
-                        <h4>Category Management</h4>
+                        <h4>Manage Quotes</h4>
                     </CCol>
 
                 </CRow>
                 {!this.state.formShow ? (
-                      <>
-                <CFormGroup row>
-                    <CCol xs="12" md="12" className='text-right'>
-                        <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
-                        <CButton
-                            variant="outline"
-                            size="sm"
-                            height='15px'
-                            className="mr-2"
-                            style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
-onClick = {this.showForm}
-                        > Add category</CButton>
+                    <>
+                        <CFormGroup row>
+                            <CCol xs="12" md="12" className='text-right'>
+                                <CLabel htmlFor="selectSm" className='w-100' ></CLabel>
+                                <CButton
+                                    variant="outline"
+                                    size="sm"
+                                    height='15px'
+                                    className="mr-2"
+                                    style={{ border: "1px solid #232333", backgroundColor: '#232333', borderRadius: '3px', color: '#ffff', height: '38px' }}
+                                    onClick={this.showForm}
+                                > Add Quotes </CButton>
 
-                    </CCol>
-                </CFormGroup>
-                
-                  
+                            </CCol>
+                        </CFormGroup>
                         <CDataTable
                             items={usersData}
                             fields={fields}
@@ -159,23 +126,18 @@ onClick = {this.showForm}
 
                             pagination
                             scopedSlots={{
-                                category_icon: (item, index) => {
-                                    return (
-                                        <td>
-                                            <CIcon name="cil-task" />
-                                        </td>
-                                    )
-                                },
 
                                 action: (item, index) => {
                                     return (
+
+
                                         <td className="py-2" style={{ whiteSpace: "nowrap" }}>
                                             <CButton
                                                 variant="outline"
                                                 size="sm"
                                                 className="mr-2"
                                                 style={{ border: "1px solid #232333" }}
-                                                onClick = {this.showForm}
+                                                onClick={this.showForm}
 
                                             >
                                                 Edit
@@ -185,7 +147,7 @@ onClick = {this.showForm}
                                                 size="sm"
                                                 className="mr-2"
                                                 style={{ border: "1px solid #232333" }}
-                                                onClick = {this.toggle}
+                                                onClick={this.toggle}
                                             >
                                                 Delete
           </CButton>
@@ -201,10 +163,14 @@ onClick = {this.showForm}
                                                 <option value="2"> De-Active</option>
 
                                             </CSelect>
+                                            {/* <CInput className='col-sm-3' type='date' /> */}
                                         </td>
+
                                     );
                                 }
-                            }} />
+                            }}
+                        />
+                        
                     </>
                 ) : (
                     <CCol xs="12" sm="12">
@@ -224,19 +190,26 @@ onClick = {this.showForm}
                                            </CFormGroup>
                                        <CCard>
                                          <CCardHeader>
-                                         Cateory Management
+                                         Manage Quotes
                                     
                                          </CCardHeader>
                                          <CCardBody>
                                            <CFormGroup>
-                                             <CLabel htmlFor="company">Category Name</CLabel>
+                                             <CLabel htmlFor="company">Author Name</CLabel>
                                              <CInput id="company" placeholder="Enter your Category Name" />
                                            </CFormGroup>
                                           
                                           
                                                                    <CFormGroup>
-                                             <CLabel htmlFor="vat">Category Level </CLabel>
-                                             <CSelect
+                                   
+                                             <CLabel htmlFor="company">Description</CLabel>
+                                             <CInput id="company" placeholder="Enter Description" />
+                                           </CFormGroup>
+                                           <CFormGroup row className="my-0">
+                                             <CCol xs="8">
+                                               <CFormGroup>
+                                               <CLabel htmlFor="date"> Quote Activation</CLabel>
+                                               <CSelect
                                                    custom
                                                    size="sm"
                                                    className="select-box"
@@ -244,29 +217,19 @@ onClick = {this.showForm}
                                                    id="SelectLm"
                                                  >
                                                    <option value="">Select</option>
-                                                   <option value="0">Main category</option>
-                                                                           <option value="1">Sub category</option>
-                                                                           <option value="1">Topic</option>
+                                                   <option value="0">Active</option>
+                                                     <option value="1">Deactivate</option>
+                                                                           
                                                  </CSelect>
-                                           </CFormGroup>
-                                           <CFormGroup row className="my-0">
-                                             <CCol xs="8">
-                                               <CFormGroup>
-                   
-                                              
-                                                 <CLabel htmlFor="company">Category Faq</CLabel>
-                                             <CInput id="company" placeholder="Enter your Category " />
                                                </CFormGroup>
                                              </CCol>
                                              <CCol xs="4">
                                                <CFormGroup>
-                                                 <CLabel htmlFor="date">Requested date</CLabel>
+                                                 <CLabel htmlFor="date">schedule quote</CLabel>
                                                  <CInput id="date" type='date' />
                                                </CFormGroup>
                                              </CCol>
-                                             <CCol xs="4">
-                   
-                                             </CCol>
+                                        
                                            </CFormGroup>
                                            <CFormGroup row>
                                              <CCol xs="12" md="12" className='text-right'>
@@ -284,7 +247,7 @@ onClick = {this.showForm}
                                            </CFormGroup>
                                          </CCardBody>
                                        </CCard>
-                                     </CCol>     
+                                     </CCol>    
                     )}
                 
                 <CModal
@@ -295,7 +258,7 @@ onClick = {this.showForm}
           <CModalBody>
             <CCol xs="10">
               <CFormGroup>
-            <p> Are you sure you want to delete this category ?</p>
+            <p> Are you sure you want to delete this quotes ?</p>
               </CFormGroup>
             </CCol>
           </CModalBody>
@@ -307,9 +270,9 @@ onClick = {this.showForm}
             >Cancel</CButton>
           </CModalFooter>
         </CModal>
-            </>
+                </>
         );
     }
 }
 
-export default CategoryManagement;
+export default ManageQuotes;

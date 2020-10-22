@@ -25,7 +25,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Member Issue Resolution Center',
     to: '/admin/memberissueresolution',
-    icon: 'cil-userFollow',
+    icon: 'cilEnvelopeOpen',
   },
   {
     _tag: 'CSidebarNavItem',
@@ -97,7 +97,7 @@ export default [
     _tag: 'CSidebarNavItem',
     name: 'Localisation',
     to: '/admin/Localisation',
-    icon: 'cilHome',
+    icon: 'cilScrubber',
   },
   {
     _tag: 'CSidebarNavItem',
@@ -124,7 +124,18 @@ export default [
     to: '/admin/BlogPostManagement',
     icon: 'cilPrint',
   },
-
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Manage Quotes',
+    to: '/admin/ManageQuotes',
+    icon: 'cilTags',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Gift cards',
+    to: '/admin/Giftcards',
+    icon: 'cilLockLocked',
+  },
 
 
 ]
