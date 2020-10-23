@@ -124,18 +124,18 @@ class MemberManagement extends Component {
     return (
       <>
         <CRow>
-          <CCol xs="12" sm="6" lg="3">
+          <CCol xs="12" lg="4">
             <CWidgetIcon text="50" header="New Host Account Requests" color="warning">
               <CIcon width={24} name="cil-settings" />
             </CWidgetIcon>
           </CCol>
-          <CCol xs="12" sm="6" lg="3">
+          <CCol xs="12" lg="4">
             <CWidgetIcon text="10" header="In-Progress" color="danger">
               <CIcon width={24} name="cil-bell" />
             </CWidgetIcon>
           </CCol>
 
-          <CCol xs="12" sm="6" lg="3">
+          <CCol xs="12" lg="4">
             <CWidgetIcon text="5" header="Approved Host Accounts" color="info">
               <CIcon width={24} name="cil-settings" />
             </CWidgetIcon>
@@ -146,12 +146,15 @@ class MemberManagement extends Component {
         <CDataTable
           items={usersData}
           fields={fields}
+          striped
+          bordered
           // columnFilter
           tableFilter
           // footer
           itemsPerPageSelect
           itemsPerPage={5}
           hover
+
           // sorter
           pagination
           scopedSlots={{
