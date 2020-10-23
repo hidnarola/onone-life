@@ -7,19 +7,20 @@ import {
   CLink,
   CRow,
   CCol,
-  CWidgetSimple
+  CWidgetSimple,
+  CWidgetIcon
 } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
 
 const fields = [
-  { key: "user_id", _style: { width: "5%" } },
-  { key: "name", _style: { width: "20%" } },
-  { key: "email_address", _style: { width: "20%" } },
-  { key: "signup_date", _style: { width: "20%" } },
-  { key: "signup_source", _style: { width: "5%" } },
+  { key: "user_id" },
+  { key: "name" },
+  { key: "email_address" },
+  { key: "signup_date" },
+  { key: "signup_source" },
   {
     key: "show_details",
     label: "Actions",
-    _style: { width: "20%" },
     sorter: false,
     filter: false,
   },
@@ -123,26 +124,23 @@ class MemberManagement extends Component {
     return (
       <>
         <CRow>
-          <CCol>
-            <CWidgetSimple
-              className="mr-3"
-              header="New Host Account Requests"
-              text="50"
-            ></CWidgetSimple>
+          <CCol xs="12" sm="6" lg="3">
+            <CWidgetIcon text="50" header="New Host Account Requests" color="warning">
+              <CIcon width={24} name="cil-settings" />
+            </CWidgetIcon>
           </CCol>
-          <CCol>
-            <CWidgetSimple
-              className="mr-3"
-              header="In-Progress"
-              text="10"
-            ></CWidgetSimple>
+          <CCol xs="12" sm="6" lg="3">
+            <CWidgetIcon text="10" header="In-Progress" color="danger">
+              <CIcon width={24} name="cil-bell" />
+            </CWidgetIcon>
           </CCol>
-          <CCol>
-            <CWidgetSimple
-              header="Approved Host Accounts"
-              text="5"
-            ></CWidgetSimple>
+
+          <CCol xs="12" sm="6" lg="3">
+            <CWidgetIcon text="5" header="Approved Host Accounts" color="info">
+              <CIcon width={24} name="cil-settings" />
+            </CWidgetIcon>
           </CCol>
+
         </CRow>
 
         <CDataTable
@@ -154,7 +152,7 @@ class MemberManagement extends Component {
           itemsPerPageSelect
           itemsPerPage={5}
           hover
-          sorter
+          // sorter
           pagination
           scopedSlots={{
             // 'password': () => (
