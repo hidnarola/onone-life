@@ -6,9 +6,11 @@ import {
     CRow,
     CCol,
     CSpinner,
+    CWidgetIcon,
 } from "@coreui/react";
 import PromoCodeForm from './pramotionalcode'
 import ReviewAndFeedbck from './Review&Feedback'
+import CIcon from "@coreui/icons-react";
 
 class Marketing extends Component {
     state = {
@@ -36,55 +38,59 @@ class Marketing extends Component {
                                             <h4>Marketing</h4>
                                         </CCol>
                                     </cRow>
-                                    <CRow>
 
-                                        <CCol>
-                                            <CWidgetSimple
-                                                className="mr-3"
-                                                header="Promotion code generation and management"
+
+                                    <CRow>
+                                        <CCol xs="12" lg="3">
+                                            <CWidgetIcon header="Promotion code generation and management"
                                                 onClick={() => {
                                                     this.showPromoCodeForm()
-                                                }}
-                                            >
-                                            </CWidgetSimple>
+                                                }} color="info">
+                                                <CIcon width={24} name="cilBookmark" />
+                                            </CWidgetIcon>
                                         </CCol>
-                                        <CCol>
-                                            <CWidgetSimple
-                                                className="mr-3"
-                                                style={{ height: "74px" }}
-                                                header="Category specific codes" >
+                                        <CCol xs="12" lg="3">
+                                            <CWidgetIcon header="Category specific codes" color="warning">
+                                                <CIcon width={24} name="cilCheck" />
+                                            </CWidgetIcon>
+                                        </CCol>
 
-                                            </CWidgetSimple>
+                                        <CCol xs="12" lg="3">
+                                            <CWidgetIcon header="User specific promotion codes and invitation"
+                                                color="danger">
+                                                <CIcon width={24} name="cilCode" />
+                                            </CWidgetIcon>
                                         </CCol>
-                                        <CCol>
-                                            <CWidgetSimple style={{ height: "74px" }}
-                                                header="User specific promotion codes and invitation"
-                                            > </CWidgetSimple>
-                                        </CCol>
-                                        <CCol>
-                                            <CWidgetSimple style={{ height: "74px" }}
-                                                header="Edit reviews and feedback ratings by user" onClick={() => {
-                                                    this.showFeedbackForm()
-                                                }} > </CWidgetSimple>
+                                        <CCol xs="12" lg="3">
+                                            <CWidgetIcon header="Edit reviews and feedback ratings by user" onClick={() => {
+                                                this.showFeedbackForm()
+                                            }}
+                                                color="warning">
+                                                <CIcon width={24} name="cilGlobeAlt" />
+                                            </CWidgetIcon>
                                         </CCol>
                                     </CRow>
                                     <CRow>
-                                        <CCol>
-                                            <CWidgetSimple
-                                                header="SEO URL Management"> </CWidgetSimple>
+                                        <CCol xs="12" lg="4">
+                                            <CWidgetIcon header="SEO URL Management" color="info">
+                                                <CIcon width={24} name="cilIndentIncrease" />
+                                            </CWidgetIcon>
                                         </CCol>
-                                        <CCol>
-                                            <CWidgetSimple
-                                                header="Newsletter"> </CWidgetSimple>
-                                        </CCol>
-                                        <CCol>
-                                            <CWidgetSimple
-                                                header="Facebook API Management"> </CWidgetSimple>
+                                        <CCol xs="12" lg="4">
+                                            <CWidgetIcon header="Newsletter" color="warning">
+                                                <CIcon width={24} name="cilLocationPin" />
+                                            </CWidgetIcon>
                                         </CCol>
 
-
+                                        <CCol xs="12" lg="4">
+                                            <CWidgetIcon header="Facebook APi"
+                                                color="danger">
+                                                <CIcon width={24} name="cilPaperclip" />
+                                            </CWidgetIcon>
+                                        </CCol>
 
                                     </CRow>
+
                                 </>
                             )}
                             {this.state.PromoCode && (

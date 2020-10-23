@@ -23,7 +23,7 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Member Issue Resolution Center',
+    name: 'Issue Resolution Center',
     to: '/admin/memberissueresolution',
     icon: 'cilEnvelopeOpen',
   },
@@ -65,13 +65,13 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Feedback & Rating Management',
+    name: 'Feedback & Rating',
     to: '/admin/FeedbackandRatingManagement',
     icon: 'cil-bell',
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Email Templates Management',
+    name: 'Email Templates',
     to: '/admin/EmailTemplatesManagement',
     icon: 'cil-task',
   },
@@ -107,7 +107,7 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Employee Access Management',
+    name: 'Employee Access',
     to: '/admin/EmployeeAccessManagement',
     icon: 'cilListRich',
   },

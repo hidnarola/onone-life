@@ -143,6 +143,8 @@ class MemberManagement extends Component {
 
         </CRow>
 
+
+
         <CDataTable
           items={usersData}
           fields={fields}
@@ -178,8 +180,9 @@ class MemberManagement extends Component {
                   <CButton
                     variant="outline"
                     size="sm"
+
                     className="mr-2"
-                    style={{ border: "1px solid #232333" }}
+                    color="warning"
                     onClick={() => {
                       this.toggleDetails(index);
                     }}
@@ -189,7 +192,8 @@ class MemberManagement extends Component {
                   <CButton
                     variant="outline"
                     size="sm"
-                    style={{ border: "1px solid #232333" }}
+                    color="info"
+
                     onClick={() => {
                       this.resetPassword(index);
                     }}

@@ -7,8 +7,10 @@ import {
     CLink,
     CRow,
     CCol,
-    CWidgetSimple
+    CWidgetSimple,
+    CWidgetIcon
 } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
 
 const fields = [
     { key: "Issue_Raised_By" },
@@ -137,33 +139,35 @@ class MemberIssueReolution extends Component {
     render() {
         return (
             <>
+
                 <CRow>
-                    <CCol>
-                        <CWidgetSimple
-                            className="mr-3"
-                            header="Total issue"
-                            text="50"
-                        ></CWidgetSimple>
+                    <CCol xs="12" lg="3">
+                        <CWidgetIcon header="Total issue"
+                            text="50" color="warning">
+                            <CIcon width={24} name="cil-settings" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            className="mr-3"
-                            header="New"
-                            text="10"
-                        ></CWidgetSimple>
+                    <CCol xs="12" lg="3">
+                        <CWidgetIcon header="New"
+                            text="10" color="danger">
+                            <CIcon width={24} name="cil-bell" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            header="In-Progress"
-                            text="5"
-                        ></CWidgetSimple>
+
+                    <CCol xs="12" lg="3">
+                        <CWidgetIcon header="In-Progress"
+                            text="5" color="info">
+                            <CIcon width={24} name="cil-settings" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            header="Resolved"
-                            text="15"
-                        ></CWidgetSimple>
+
+                    <CCol xs="12" lg="3">
+                        <CWidgetIcon header="Resolved"
+                            text="15" color="danger">
+                            <CIcon width={24} name="cil-moon" />
+                        </CWidgetIcon>
                     </CCol>
+
                 </CRow>
 
                 <CDataTable

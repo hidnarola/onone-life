@@ -13,8 +13,10 @@ import {
     CModalBody,
     CModalFooter,
     CTextarea,
-    CModalHeader
+    CModalHeader,
+    CWidgetIcon
 } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
 
 const fields = [
     { key: "User_Name", label: 'User Name' },
@@ -50,49 +52,48 @@ class AccountandPayments extends Component {
     render() {
         return (
             <>
+
                 <CRow>
-                    <CCol>
-                        <CWidgetSimple
-                            className="mr-3"
-                            header="Total revenue"
-                            text="$500"
-                            style={{ height: "134px" }}
-                        ></CWidgetSimple>
+                    <CCol xs="12" lg="4">
+                        <CWidgetIcon header="Total revenue"
+                            text="$500" color="info">
+                            <CIcon width={24} name="cilScrubber" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            className="mr-3"
-                            header="Total platform commission "
-                            text="$500"
-                            style={{ height: "134px" }}
-                        ></CWidgetSimple>
+                    <CCol xs="12" lg="4">
+                        <CWidgetIcon header="Total platform commission "
+                            text="$500" color="danger">
+                            <CIcon width={24} name="cilSun" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            header="Total transferred out"
-                            text="5"
-                            style={{ height: "134px" }}
-                        ></CWidgetSimple>
+
+                    <CCol xs="12" lg="4">
+                        <CWidgetIcon header="Total transferred out"
+                            text="5" color="info">
+                            <CIcon width={24} name="cilTags" />
+                        </CWidgetIcon>
                     </CCol>
 
                 </CRow>
                 <CRow>
+                    <CCol xs="12" lg="6">
+                        <CWidgetIcon header="Total balance in wallets"
 
-                    <CCol>
-                        <CWidgetSimple
-                            header="Total balance in wallets"
-                            style={{ height: "134px" }}
-                            text="$500"
-                        ></CWidgetSimple>
-                    </CCol>   <CCol>
-                        <CWidgetSimple
-                            style={{ height: "134px" }}
-                            header="Total unavailable balance / locKed"
-                            text="$600"
-                        ></CWidgetSimple>
+                            text="$500" color="warning">
+                            <CIcon width={24} name="cilShieldAlt" />
+                        </CWidgetIcon>
+                    </CCol>
+                    <CCol xs="12" lg="6">
+                        <CWidgetIcon header="Total unavailable balance / locKed"
+                            text="$600" color="danger">
+                            <CIcon width={24} name="cilDollar" />
+                        </CWidgetIcon>
                     </CCol>
 
+
+
                 </CRow>
+
 
                 <CDataTable
                     items={usersData}

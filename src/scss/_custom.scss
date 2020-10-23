@@ -17,6 +17,11 @@ body {
 
   .c-main {
     background-color: #f1f1f1;
+    .page-item.active .page-link {
+      color: #fff;
+      background-color: #3399ff;
+      border-color: #3399ff;
+    }
     .fileUpload {
       position: relative;
       overflow: hidden;

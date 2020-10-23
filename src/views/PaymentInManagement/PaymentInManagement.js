@@ -7,8 +7,10 @@ import {
     CLink,
     CRow,
     CCol,
-    CWidgetSimple
+    CWidgetSimple,
+    CWidgetIcon
 } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
 
 const fields = [
     { key: "Transaction_ID", label: 'Transaction ID' },
@@ -128,26 +130,27 @@ class PaymentInManagement extends Component {
     render() {
         return (
             <>
+
+
                 <CRow>
-                    <CCol>
-                        <CWidgetSimple
-                            className="mr-3"
-                            header="Total Transactions"
-                            text="500600"
-                        ></CWidgetSimple>
+                    <CCol xs="12" lg="4">
+                        <CWidgetIcon header="Total Transactions"
+                            text="500600" color="warning">
+                            <CIcon width={24} name="cilInputPower" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            className="mr-3"
-                            header="Total Credits SolD"
-                            text="2000020"
-                        ></CWidgetSimple>
+                    <CCol xs="12" lg="4">
+                        <CWidgetIcon header="Total Event/Listing Purchased"
+                            text="1203556" color="danger">
+                            <CIcon width={24} name="cilNotes" />
+                        </CWidgetIcon>
                     </CCol>
-                    <CCol>
-                        <CWidgetSimple
-                            header="Total Event/Listing Purchased"
-                            text="1203556"
-                        ></CWidgetSimple>
+
+                    <CCol xs="12" lg="4">
+                        <CWidgetIcon header="Approved Host Accounts"
+                            text="100" color="info">
+                            <CIcon width={24} name="cilShareBoxed" />
+                        </CWidgetIcon>
                     </CCol>
 
                 </CRow>

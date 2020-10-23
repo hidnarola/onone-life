@@ -20,12 +20,14 @@ import {
   CModalBody,
   CModalFooter,
   CTextarea,
-  CModalHeader
+  CModalHeader,
+  CWidgetIcon
 
 } from "@coreui/react";
 import Moment from "react-moment";
 import { getExperts } from "../../redux/actions/hostManagementActions";
 import RequestExpert from '../requestExpert/requestExpert'
+import CIcon from "@coreui/icons-react";
 
 const fields = [
   // { key: "userId", _style: { width: "2%" } },
@@ -202,26 +204,26 @@ class HostManagement extends Component {
 
               <>
                 <CRow>
-                  <CCol>
-                    <CWidgetSimple
-                      className="mr-3"
-                      header="New Host Account Requests"
-                      text="50"
-                    ></CWidgetSimple>
+                  <CCol xs="12" lg="4">
+                    <CWidgetIcon header="New Host Account Requests"
+                      text="50" color="warning">
+                      <CIcon width={24} name="cil-settings" />
+                    </CWidgetIcon>
                   </CCol>
-                  <CCol>
-                    <CWidgetSimple
-                      className="mr-3"
-                      header="In-Progress"
-                      text="20"
-                    ></CWidgetSimple>
+                  <CCol xs="12" lg="4">
+                    <CWidgetIcon header="In-Progress"
+                      text="20" color="danger">
+                      <CIcon width={24} name="cil-bell" />
+                    </CWidgetIcon>
                   </CCol>
-                  <CCol>
-                    <CWidgetSimple
-                      header="Approved Host Accounts"
-                      text="100"
-                    ></CWidgetSimple>
+
+                  <CCol xs="12" lg="4">
+                    <CWidgetIcon header="Approved Host Accounts"
+                      text="100" color="info">
+                      <CIcon width={24} name="cil-settings" />
+                    </CWidgetIcon>
                   </CCol>
+
                 </CRow>
                 <CFormGroup row>
                   <CCol xs="12" md="3" className="col-sm-4">
@@ -303,6 +305,7 @@ class HostManagement extends Component {
                           <CButton
                             variant="outline"
                             size="sm"
+
                             className="mr-2"
                             style={{ color: "#fff", backgroundColor: "red" }}
                             onClick={() => {
@@ -315,8 +318,8 @@ class HostManagement extends Component {
                             variant="outline"
                             size="sm"
                             className="mr-2"
-                            style={{ border: "1px solid #232333" }}
 
+                            color="dark"
                           >
                             View Experts details
                           </CButton>
@@ -325,8 +328,8 @@ class HostManagement extends Component {
                             variant="outline"
                             size="sm"
                             className="mr-2"
-                            style={{ border: "1px solid #232333" }}
 
+                            color="primary"
                           >
                             Edit and Approve
                       </CButton>
@@ -334,7 +337,7 @@ class HostManagement extends Component {
                             variant="outline"
                             size="sm"
                             className="mr-2"
-                            style={{ border: "1px solid #232333" }}
+                            color="danger"
                             onClick={() => {
                               this.OpenRequestModal();
                             }}
@@ -344,7 +347,7 @@ class HostManagement extends Component {
                           <CButton
                             variant="outline"
                             size="sm"
-                            style={{ border: "1px solid #232333" }}
+                            color="info"
                             onClick={() => {
                               this.toggle();
                             }}

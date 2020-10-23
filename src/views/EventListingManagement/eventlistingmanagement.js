@@ -263,7 +263,7 @@ class EventListingmanagement extends Component {
                                                             variant="outline"
                                                             size="sm"
                                                             className="mr-2"
-                                                            style={{ border: "1px solid #232333" }}
+                                                            color="dark"
                                                             onClick={() => {
                                                                 this.OpenRequestModal();
                                                             }}
@@ -274,7 +274,7 @@ class EventListingmanagement extends Component {
                                                             variant="outline"
                                                             size="sm"
                                                             className="mr-2"
-                                                            style={{ border: "1px solid #232333" }}
+                                                            color="warning"
                                                             onClick={() => {
                                                                 this.showForm();
                                                             }}  
