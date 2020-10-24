@@ -41,6 +41,7 @@ class EmailTemplatesManagement extends Component {
                                     <CRow>
 
                                         <CCol>
+
                                             <CWidgetSimple
                                                 className="mr-3"
                                                 header="New Joiner"
