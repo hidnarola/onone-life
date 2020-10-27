@@ -123,7 +123,7 @@ class EventListingmanagement extends Component {
         formShow: false,
     };
     componentDidMount() {
-        this.props.dispatch(getExperts(defaultPage, defaultPageSize));
+       // this.props.dispatch(getExperts(defaultPage, defaultPageSize));
     }
 
 
@@ -396,12 +396,7 @@ class EventListingmanagement extends Component {
 const mapStateToProps = (state) => {
     // console.log("State: ", state);
     return {
-        hostData: state.hostManagement.hostData,
-        pages: state.hostManagement.pages,
-        tableLoading: state.hostManagement.loading,
-        inProgressRequest: state.hostManagement.inProgressRequest,
-        pendingPequest: state.hostManagement.pendingPequest,
-        approvedRequest: state.hostManagement.approvedRequest,
+  
     };
 };
 
