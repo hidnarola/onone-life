@@ -71,18 +71,18 @@ class Marketing extends Component {
                                         </CCol>
                                     </CRow>
                                     <CRow>
-                                        <CCol xs="12" lg="4">
+                                        <CCol xs="12" lg="3">
                                             <CWidgetIcon header="SEO URL Management" color="info">
                                                 <CIcon width={24} name="cilIndentIncrease" />
                                             </CWidgetIcon>
                                         </CCol>
-                                        <CCol xs="12" lg="4">
+                                        <CCol xs="12" lg="3">
                                             <CWidgetIcon header="Newsletter" color="warning">
                                                 <CIcon width={24} name="cilLocationPin" />
                                             </CWidgetIcon>
                                         </CCol>
 
-                                        <CCol xs="12" lg="4">
+                                        <CCol xs="12" lg="3">
                                             <CWidgetIcon header="Facebook APi"
                                                 color="danger">
                                                 <CIcon width={24} name="cilPaperclip" />
