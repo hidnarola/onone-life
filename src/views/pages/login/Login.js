@@ -35,8 +35,9 @@ class Login extends React.Component {
     console.log(recaptchaToken, "<= your recaptcha token");
   }
 
-  loggedIn(email, password) {
-    this.props.dispatch(logIn(email, password));
+  loggedIn() {
+    this.props.history.push('/dashboard')
+    // this.props.dispatch(logIn(email, password));
   }
 
   onChange = (value, key) => {
@@ -120,14 +121,15 @@ class Login extends React.Component {
                         <CCol xs="6">
                           <CButton
                             color="primary"
+
                             className="px-4"
                             onClick={() =>
                               this.loggedIn(
-                                this.state.emailAddress,
-                                this.state.password
+
                               )
                             }
                           >
+
                             Login
                           </CButton>
                         </CCol>
