@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   CHeader,
@@ -19,22 +19,25 @@ import { TheHeaderDropdown } from "./index";
 
 const TheHeader = () => {
   const dispatch = useDispatch();
-  const sidebarShow = useSelector((state) => state.sidebarShow);
+
+  const [openSidebar, setOpenSidebar] = useState(true);
+  // const sidebarShow = useSelector((state) => state.sidebarShow);
 
   const toggleSidebar = () => {
-    console.log("Sidebar")
-    // debugger;
-    const val = [true, 'responsive'].includes(sidebarShow)
-      ? false
-      : 'responsive';
-    dispatch({ type: 'set', sidebarShow: val });
+    setOpenSidebar(!openSidebar);
+    // const val = [true, "responsive"].includes(sidebarShow)
+    //   ? false
+    //   : "responsive";
+    dispatch({ type: "set", sidebarShow: openSidebar ? false : "responsive" });
   };
 
   const toggleSidebarMobile = () => {
-    const val = [false, 'responsive'].includes(sidebarShow)
-      ? true
-      : 'responsive';
-    dispatch({ type: 'set', sidebarShow: val });
+    setOpenSidebar(!openSidebar);
+    dispatch({ type: "set", sidebarShow: openSidebar ? false : "responsive" });
+    // const val = [false, "responsive"].includes(sidebarShow)
+    //   ? true
+    //   : "responsive";
+    // dispatch({ type: "set", sidebarShow: val });
   };
 
   return (

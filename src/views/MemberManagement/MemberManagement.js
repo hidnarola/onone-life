@@ -7,8 +7,7 @@ import {
   CLink,
   CRow,
   CCol,
-  CWidgetSimple,
-  CWidgetIcon
+  CWidgetIcon,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
@@ -125,7 +124,11 @@ class MemberManagement extends Component {
       <>
         <CRow>
           <CCol xs="12" lg="4">
-            <CWidgetIcon text="50" header="New Host Account Requests" color="warning">
+            <CWidgetIcon
+              text="50"
+              header="New Host Account Requests"
+              color="warning"
+            >
               <CIcon width={24} name="cil-settings" />
             </CWidgetIcon>
           </CCol>
@@ -140,10 +143,7 @@ class MemberManagement extends Component {
               <CIcon width={24} name="cil-settings" />
             </CWidgetIcon>
           </CCol>
-
         </CRow>
-
-
 
         <CDataTable
           items={usersData}
@@ -156,7 +156,6 @@ class MemberManagement extends Component {
           itemsPerPageSelect
           itemsPerPage={5}
           hover
-
           // sorter
           pagination
           scopedSlots={{
@@ -180,7 +179,6 @@ class MemberManagement extends Component {
                   <CButton
                     variant="outline"
                     size="sm"
-
                     className="mr-2"
                     color="warning"
                     onClick={() => {
@@ -193,13 +191,12 @@ class MemberManagement extends Component {
                     variant="outline"
                     size="sm"
                     color="info"
-
                     onClick={() => {
                       this.resetPassword(index);
                     }}
                   >
                     Reset Password
-                </CButton>
+                  </CButton>
                 </td>
               );
             },
@@ -217,34 +214,34 @@ class MemberManagement extends Component {
                     <p className="text-muted">Expert Purpose: NA</p>
                     <p className="text-muted">
                       Expert Account Approval Date: 05/05/2020
-                  </p>
+                    </p>
                     <p className="text-muted">Account Approved By: Test</p>
                     <p className="text-muted">Approval Notes and Comments: -</p>
                     <p className="text-muted">IP Address Log: -</p>
-                    <p className="text-muted">Change Account Status: Warning1</p>
+                    <p className="text-muted">
+                      Change Account Status: Warning1
+                    </p>
                     <p className="text-muted">Member Account View: -</p>
                     <p className="text-muted">
                       No. of Listing + Listing History: -
-                  </p>
+                    </p>
                     <p className="text-muted">
                       No. of Events Attended + Attendance History: -
-                  </p>
+                    </p>
                     <p className="text-muted">Expert Categories: -</p>
                     <p className="text-muted">Expert Secondary Categories: -</p>
                     <p className="text-muted">
                       No. of Expert Request Submitted: -
-                  </p>
+                    </p>
                     <p className="text-muted">
                       Total Value of All Transactions : -
-                  </p>
+                    </p>
                     <p className="text-muted">Landing Page Link : -</p>
-
                   </CCardBody>
                 </CCollapse>
               );
             },
           }}
-
         />
       </>
     );

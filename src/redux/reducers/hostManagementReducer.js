@@ -1,23 +1,37 @@
-import { GET_EXPERTS_DATA } from "../actions/index";
+import {
+  GET_EXPERTS_DATA,
+  APPROVE_PENDING_REQUEST,
+  ADD_NOTES,
+} from "../actions/index";
 
 const initialState = {
   hostData: [],
+  dataLoaded: false,
 };
 
-const hostManagementReducer = (state = initialState, { type, payload, pages, loading, inProgressRequest, pendingPequest, approvedRequest }) => {
+const hostManagementReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_EXPERTS_DATA:
-      console.log("Payload: ", payload)
       return {
         ...state,
-        hostData: payload,
-        pages,
-        loading,
-        inProgressRequest,
-        pendingPequest,
-        approvedRequest
+        hostData: payload.hostData,
+        pages: payload.pages,
+        dataLoaded: payload.dataLoaded,
+        inProgressRequest: payload.inProgressRequest,
+        pendingPequest: payload.pendingPequest,
+        approvedRequest: payload.approvedRequest,
       };
-      default:
+    case APPROVE_PENDING_REQUEST:
+      return {
+        ...state,
+        approveRequestMessage: payload.approveRequestMessage,
+      };
+    case ADD_NOTES:
+      return {
+        ...state,
+        addNotesMessage: payload.addNotesMessage,
+      };
+    default:
       return state;
   }
 };

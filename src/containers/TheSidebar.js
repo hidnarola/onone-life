@@ -9,18 +9,17 @@ import {
   CSidebarNavTitle,
   CSidebarMinimizer,
   CSidebarNavDropdown,
-  CSidebarNavItem
+  CSidebarNavItem,
 } from "@coreui/react";
 
 import CIcon from "@coreui/icons-react";
-import { ReactComponent as Logo } from '../assets/icons/logo.svg';
+import { ReactComponent as Logo } from "../assets/icons/logo.svg";
 // sidebar nav config
 import navigation from "./_nav";
 
 const TheSidebar = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebarShow);
-
 
   return (
     <CSidebar

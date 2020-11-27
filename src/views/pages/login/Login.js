@@ -1,5 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -12,11 +14,44 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+  CRow,
+  CFormGroup,
+  CInputCheckbox,
+  CLabel,
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import Reaptcha from "reaptcha";
+
+import { logIn } from "../../../redux/actions/authActions";
+import { GOOGLE_RECAPTCHA_SITE_KEY } from "../../../constants/Constants";
 
 const Login = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [googleRecaptchaToken, setGoogleRecaptchaToken] = useState("");
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
+    if (token) {
+      history.push("/dashboard");
+    }
+  });
+
+  const errorMessage = useSelector((state) => state.auth.errorMessage);
+  console.log("errorMessage: ", errorMessage);
+
+  const onVerify = (invisible) => (token) => {
+    // console.log("Token: ", token);
+    setGoogleRecaptchaToken(token);
+  };
+
+  const doLogin = () => {
+    dispatch(logIn(emailAddress, password, googleRecaptchaToken));
+  };
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -34,7 +69,17 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      {/* <CInput
+                        type="text"
+                        placeholder="Username"
+                        autoComplete="username"
+                      /> */}
+                      <CInput
+                        type="email"
+                        placeholder="Email Address"
+                        autoComplete="emailaddress"
+                        onChange={(e) => setEmailAddress(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -42,29 +87,96 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput
+                        type="password"
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
                     </CInputGroup>
+                    {errorMessage ? (
+                      <p className="text-danger mt-1 mb-1">{errorMessage}</p>
+                    ) : null}
+                    <CRow className="mb-3 mt-2">
+                      <CCol xs="6">
+                        <CFormGroup variant="checkbox" className="checkbox">
+                          <CInputCheckbox
+                            id="rememberMe"
+                            name="rememberMe"
+                            value="rememberMe"
+                          />
+                          <CLabel
+                            variant="checkbox"
+                            className="form-check-label"
+                            htmlFor="rememberMe"
+                          >
+                            Remember Me
+                          </CLabel>
+                        </CFormGroup>
+                      </CCol>
+                    </CRow>
+                    <CRow>
+                      <div>
+                        <Reaptcha
+                          // ref={(e) => (this.captcha = e)}
+                          sitekey={GOOGLE_RECAPTCHA_SITE_KEY}
+                          size="normal"
+                          // theme={theme}
+                          render="explicit"
+                          onVerify={onVerify(false)}
+                          // onExpire={this.onExpire(invisible)}
+                        />
+                      </div>
+                    </CRow>
                     <CRow>
                       <CCol xs="6">
                         <Link to="/Dashboard">
-                          <CButton color="primary" className="px-4">Login</CButton>
+                          <CButton
+                            color="primary"
+                            className="px-4"
+                            disabled={!emailAddress || !password}
+                            onClick={(e) => doLogin()}
+                          >
+                            Login
+                          </CButton>
                         </Link>
                       </CCol>
                       <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
+                        <CButton
+                          color="link"
+                          className="px-0"
+                          onClick={() => {
+                            history.push("/forgotPassword");
+                          }}
+                        >
+                          Forgot password?
+                        </CButton>
                       </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard
+                className="text-white bg-primary py-5 d-md-down-none"
+                style={{ width: "44%" }}
+              >
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
+                      <CButton
+                        color="primary"
+                        className="mt-3"
+                        active
+                        tabIndex={-1}
+                      >
+                        Register Now!
+                      </CButton>
                     </Link>
                   </div>
                 </CCardBody>
@@ -74,7 +186,7 @@ const Login = () => {
         </CRow>
       </CContainer>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
