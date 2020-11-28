@@ -1,5 +1,4 @@
-import React, { lazy, useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { lazy } from "react";
 import {
   CBadge,
   CButton,
@@ -21,16 +20,6 @@ const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"));
 
 const Dashboard = () => {
-  const [redirctTo, setRedirctTo] = useState(false);
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
-    if (!token) {
-      setRedirctTo(true);
-    }
-  }, []);
-  if (redirctTo) {
-    return <Redirect to="/login" />;
-  }
   return (
     <>
       <WidgetsDropdown />

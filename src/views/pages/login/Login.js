@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -22,26 +21,22 @@ import {
 import CIcon from "@coreui/icons-react";
 import Reaptcha from "reaptcha";
 
+import "./login.css";
+
 import { logIn } from "../../../redux/actions/authActions";
 import { GOOGLE_RECAPTCHA_SITE_KEY } from "../../../constants/Constants";
 
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [googleRecaptchaToken, setGoogleRecaptchaToken] = useState("");
 
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
-    if (token) {
-      history.push("/dashboard");
-    }
-  });
-
   const errorMessage = useSelector((state) => state.auth.errorMessage);
-  console.log("errorMessage: ", errorMessage);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const onVerify = (invisible) => (token) => {
     // console.log("Token: ", token);
@@ -49,14 +44,17 @@ const Login = () => {
   };
 
   const doLogin = () => {
-    dispatch(logIn(emailAddress, password, googleRecaptchaToken));
+    dispatch(logIn(emailAddress, password, googleRecaptchaToken, history));
   };
 
+  if (isLoggedIn || token) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md="8">
+          <CCol md="auto">
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
@@ -97,7 +95,7 @@ const Login = () => {
                     {errorMessage ? (
                       <p className="text-danger mt-1 mb-1">{errorMessage}</p>
                     ) : null}
-                    <CRow className="mb-3 mt-2">
+                    <CRow className="mb-3 mt-2 align-items-center">
                       <CCol xs="6">
                         <CFormGroup variant="checkbox" className="checkbox">
                           <CInputCheckbox
@@ -114,9 +112,20 @@ const Login = () => {
                           </CLabel>
                         </CFormGroup>
                       </CCol>
+                      <CCol xs="6" className="text-right">
+                        <CButton
+                          color="link"
+                          className="px-0 txt-forgot"
+                          onClick={() => {
+                            history.push("/forgotPassword");
+                          }}
+                        >
+                          Forgot password?
+                        </CButton>
+                      </CCol>
                     </CRow>
                     <CRow>
-                      <div>
+                      <div className="col-sm-12">
                         <Reaptcha
                           // ref={(e) => (this.captcha = e)}
                           sitekey={GOOGLE_RECAPTCHA_SITE_KEY}
@@ -129,11 +138,11 @@ const Login = () => {
                       </div>
                     </CRow>
                     <CRow>
-                      <CCol xs="6">
+                      <CCol xs="12" className="mt-3">
                         <Link to="/Dashboard">
                           <CButton
-                            color="primary"
-                            className="px-4"
+                            color="secondary"
+                            className="px-4 w-100 dark-btn"
                             disabled={!emailAddress || !password}
                             onClick={(e) => doLogin()}
                           >
@@ -141,22 +150,11 @@ const Login = () => {
                           </CButton>
                         </Link>
                       </CCol>
-                      <CCol xs="6" className="text-right">
-                        <CButton
-                          color="link"
-                          className="px-0"
-                          onClick={() => {
-                            history.push("/forgotPassword");
-                          }}
-                        >
-                          Forgot password?
-                        </CButton>
-                      </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard
+              {/* <CCard
                 className="text-white bg-primary py-5 d-md-down-none"
                 style={{ width: "44%" }}
               >
@@ -180,7 +178,7 @@ const Login = () => {
                     </Link>
                   </div>
                 </CCardBody>
-              </CCard>
+              </CCard> */}
             </CCardGroup>
           </CCol>
         </CRow>

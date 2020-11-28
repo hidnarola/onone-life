@@ -46,89 +46,6 @@ const fields = [
 const defaultPage = 1;
 const defaultPageSize = 5;
 
-const usersData = [
-  {
-    user_id: 1,
-    name: "John Doe",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "Yes",
-  },
-  {
-    user_id: 2,
-    name: "Samppa Nori",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-  {
-    user_id: 3,
-    name: "Estavan Lykos",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-  {
-    user_id: 4,
-    name: "Chetan Mohamed",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-  {
-    user_id: 5,
-    name: "Derick Maximinus",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-  {
-    user_id: 6,
-    name: "Friderik Dávid",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-  {
-    user_id: 7,
-    name: "Yiorgos Avraamu",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-  {
-    user_id: 8,
-    name: "Avram Tarasios",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "Yes",
-  },
-  {
-    user_id: 9,
-    name: "Quintin Ed",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "Yes",
-  },
-  {
-    user_id: 10,
-    name: "Enéas Kwadwo",
-    emailAddress: "kip@narola.email",
-    category: "host",
-    signupDate: "05/05/2020",
-    submission: "NO",
-  },
-];
-
 class HostManagement extends Component {
   state = {
     userData: [],
@@ -376,6 +293,11 @@ class HostManagement extends Component {
                           size="sm"
                           className="mr-2"
                           color="dark"
+                          onClick={() =>
+                            window.open(
+                              `http://localhost:3001/expert-details/${item.userId}`
+                            )
+                          }
                         >
                           View Experts details
                         </CButton>
