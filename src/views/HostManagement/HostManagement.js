@@ -320,9 +320,11 @@ class HostManagement extends Component {
                           size="sm"
                           className="mr-2"
                           color="danger"
-                          onClick={() => {
-                            this.OpenRequestModal();
-                          }}
+                          onClick={() =>
+                            window.open(
+                              `http://localhost:3001/expert-request-changes?adminToken=${token}&userId=${item.userId}&action=request_change`
+                            )
+                          }
                         >
                           Request Changes
                         </CButton>
