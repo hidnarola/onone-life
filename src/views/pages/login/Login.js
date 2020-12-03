@@ -38,9 +38,9 @@ const Login = () => {
   const errorMessage = useSelector((state) => state.auth.errorMessage);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const onVerify = (invisible) => (token) => {
-    // console.log("Token: ", token);
-    setGoogleRecaptchaToken(token);
+  const onVerify = (invisible) => (recaptchaToken) => {
+    // console.log("Token: ", recaptchaToken);
+    setGoogleRecaptchaToken(recaptchaToken);
   };
 
   const doLogin = () => {

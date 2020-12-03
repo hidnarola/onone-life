@@ -20,6 +20,7 @@ const hostManagementReducer = (state = initialState, { type, payload }) => {
         inProgressRequest: payload.inProgressRequest,
         pendingPequest: payload.pendingPequest,
         approvedRequest: payload.approvedRequest,
+        url: payload.url,
       };
     case APPROVE_PENDING_REQUEST:
       return {

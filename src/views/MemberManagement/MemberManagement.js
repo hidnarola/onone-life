@@ -180,6 +180,19 @@ class MemberManagement extends Component {
                   <option value="host">Host</option>
                 </CSelect>
               </CCol>
+              <CCol xs="12" md="3" className="col-sm-4">
+                <CButton
+                  variant="outline"
+                  size="sm"
+                  className="mr-2"
+                  target="_blank"
+                  onClick={() => {
+                    window.open(`http://192.168.100.39:8000/${this.props.url}`);
+                  }}
+                >
+                  Export List as CSV
+                </CButton>
+              </CCol>
             </CFormGroup>
 
             <CDataTable
@@ -310,11 +323,11 @@ class MemberManagement extends Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("State: ", state);
   return {
     memberData: state.memberManagement.memberData,
     pages: state.memberManagement.pages,
     tableDataLoaded: state.memberManagement.dataLoaded,
+    url: state.memberManagement.url,
   };
 };
 

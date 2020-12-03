@@ -13,6 +13,7 @@ const memberManagementReducer = (state = initialState, { type, payload }) => {
         memberData: payload.memberData,
         pages: payload.pages,
         dataLoaded: payload.dataLoaded,
+        url: payload.url,
       };
 
     default:

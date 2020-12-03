@@ -49,6 +49,7 @@ export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
       inProgressRequest: res.data.in_progress_request,
       pendingPequest: res.data.pending_request,
       approvedRequest: res.data.approved_request,
+      url: res.data.url,
     },
   });
 };

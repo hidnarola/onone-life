@@ -235,6 +235,21 @@ class HostManagement extends Component {
                     <option value="pending">Pending</option>
                   </CSelect>
                 </CCol>
+                <CCol xs="12" md="3" className="col-sm-4">
+                  <CButton
+                    variant="outline"
+                    size="sm"
+                    className="mr-2"
+                    target="_blank"
+                    onClick={() => {
+                      window.open(
+                        `http://192.168.100.39:8000/${this.props.url}`
+                      );
+                    }}
+                  >
+                    Export List as CSV
+                  </CButton>
+                </CCol>
               </CFormGroup>
 
               <CDataTable
@@ -295,7 +310,7 @@ class HostManagement extends Component {
                           color="dark"
                           onClick={() =>
                             window.open(
-                              `http://localhost:3001/expert-details/${item.userId}`
+                              `http://localhost:3000/expert-details/${item.userId}`
                             )
                           }
                         >
@@ -309,7 +324,7 @@ class HostManagement extends Component {
                           color="primary"
                           onClick={() =>
                             window.open(
-                              `http://localhost:3001/expert?adminToken=${token}&userId=${item.userId}`
+                              `http://localhost:3000/expert-approve?adminToken=${token}&userId=${item.userId}`
                             )
                           }
                         >
@@ -322,7 +337,7 @@ class HostManagement extends Component {
                           color="danger"
                           onClick={() =>
                             window.open(
-                              `http://localhost:3001/expert-request-changes?adminToken=${token}&userId=${item.userId}&action=request_change`
+                              `http://localhost:3000/expert-request-changes?adminToken=${token}&userId=${item.userId}&action=request_change`
                             )
                           }
                         >
@@ -363,24 +378,6 @@ class HostManagement extends Component {
           </div>
         )}
 
-        {/* <CModal show={this.state.setModal} onClose={this.toggle}>
-          <CModalHeader closeButton>Notes</CModalHeader>
-          <CModalBody>
-            <CCol xs="4">
-              <CFormGroup>
-                <CLabel htmlFor="date">Notes</CLabel>
-                <CTextarea id="date" type="text" style={{ width: "433px" }} />
-              </CFormGroup>
-            </CCol>
-          </CModalBody>
-          <CModalFooter>
-            <CButton color="primary">Add</CButton>
-            <CButton color="secondary" onClick={this.toggle}>
-              Cancel
-            </CButton>
-          </CModalFooter>
-        </CModal> */}
-
         <RequestExpert
           OpenRequest={this.state.OpenRequest}
           OpenRequestModal={this.OpenRequestModal}
@@ -399,6 +396,7 @@ const mapStateToProps = (state) => {
     approvedRequest: state.hostManagement.approvedRequest,
     approveRequestMessage: state.hostManagement.approveRequestMessage,
     addNotesMessage: state.hostManagement.addNotesMessage,
+    url: state.hostManagement.url,
   };
 };
 
