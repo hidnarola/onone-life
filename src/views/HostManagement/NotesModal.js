@@ -9,13 +9,9 @@ import {
   CTextarea,
 } from "@coreui/react";
 import axios from "axios";
+// import axios from "../../axios";
 import { BASE_URL } from "../../constants/Constants";
 import { addNotes } from "../../redux/actions/hostManagementActions";
-
-const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
-const options = {
-  headers: { "x-access-token": token },
-};
 
 class NotesModal extends Component {
   state = {
@@ -24,14 +20,10 @@ class NotesModal extends Component {
   async saveNotes(id, notes) {
     this.setState({ loading: true });
     try {
-      const res = await axios.put(
-        `${BASE_URL}/admin/expert/notes`,
-        {
-          id,
-          notes,
-        },
-        options
-      );
+      const res = await axios.put(`${BASE_URL}/admin/expert/notes`, {
+        id,
+        notes,
+      });
       //   console.log(res);
       this.props.dispatch(addNotes(res.data.message));
     } catch (error) {

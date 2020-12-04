@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
+import axios from "../../axios";
 import {
   CCardBody,
   CDataTable,
@@ -18,11 +18,6 @@ import {
 import Moment from "react-moment";
 import { getMembers } from "../../redux/actions/memberManagementActions";
 import { BASE_URL } from "../../constants/Constants";
-
-const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
-const options = {
-  headers: { "x-access-token": token },
-};
 
 const fields = [
   { key: "userId" },
@@ -91,13 +86,9 @@ class MemberManagement extends Component {
 
   async resetPassword(item) {
     try {
-      await axios.put(
-        `${BASE_URL}/admin/member/change_password`,
-        {
-          id: item.userId,
-        },
-        options
-      );
+      await axios.put(`${BASE_URL}/admin/member/change_password`, {
+        id: item.userId,
+      });
     } catch (error) {
       console.log("Error", error);
     }

@@ -2,11 +2,6 @@ import axios from "axios";
 import { GET_EXPERTS_DATA, APPROVE_PENDING_REQUEST, ADD_NOTES } from "./index";
 import { BASE_URL } from "../../constants/Constants";
 
-const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
-const options = {
-  headers: { "x-access-token": token },
-};
-
 export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
   const obj = {
     start: (page - 1) * limit,
@@ -18,7 +13,7 @@ export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
   if (sortBy) {
     obj.sort_by = sortBy;
   }
-  const res = await axios.post(`${BASE_URL}/admin/expert`, obj, options);
+  const res = await axios.post(`${BASE_URL}/admin/expert`, obj);
 
   const hostData = res.data.data.map((host) => {
     let cat = [];
@@ -54,12 +49,14 @@ export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
   });
 };
 
-export const approvePendingRequest = (userId) => async (dispatch) => {
-  const res = await axios.put(
-    `${BASE_URL}/admin/expert/approve`,
-    { id: userId },
-    options
-  );
+export const approvePendingRequest = (userId, page, pageSize) => async (
+  dispatch
+) => {
+  const res = await axios.put(`${BASE_URL}/admin/expert/approve`, {
+    id: userId,
+  });
+
+  dispatch(getExperts(page, pageSize));
 
   // console.log(res);
   dispatch({

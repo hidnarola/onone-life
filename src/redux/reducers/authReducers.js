@@ -10,11 +10,13 @@ const initialState = {
 const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case LOGIN_SUCCESS:
+      console.log("Payload", payload);
       return {
         ...state,
         authData: payload,
         errorMessage: null,
         isLoggedIn: true,
+        loggedInToken: payload.token,
       };
     case LOGIN_FAILED:
       return {

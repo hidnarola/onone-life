@@ -1,11 +1,7 @@
 import axios from "axios";
+// import axios from "../../axios";
 import { GET_MEMBERS_DATA } from "./index";
 import { BASE_URL } from "../../constants/Constants";
-
-const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
-const options = {
-  headers: { "x-access-token": token },
-};
 
 export const getMembers = (page, limit, status, sortBy) => async (dispatch) => {
   const obj = {
@@ -18,7 +14,7 @@ export const getMembers = (page, limit, status, sortBy) => async (dispatch) => {
   if (sortBy) {
     obj.sort_by = sortBy;
   }
-  const res = await axios.post(`${BASE_URL}/admin/members`, obj, options);
+  const res = await axios.post(`${BASE_URL}/admin/members`, obj);
 
   const memberData = res.data.data.map((member) => {
     const languages =

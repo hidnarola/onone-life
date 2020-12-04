@@ -29,7 +29,7 @@ import { GOOGLE_RECAPTCHA_SITE_KEY } from "../../../constants/Constants";
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
+  // const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +47,7 @@ const Login = () => {
     dispatch(logIn(emailAddress, password, googleRecaptchaToken, history));
   };
 
-  if (isLoggedIn || token) {
+  if (isLoggedIn) {
     return <Redirect to="/dashboard" />;
   }
   return (

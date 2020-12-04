@@ -82,16 +82,12 @@ class HostManagement extends Component {
   approveStatus = (userId) => {
     const btn = document.getElementById("approveButton");
     btn.disabled = true;
-    this.props.dispatch(approvePendingRequest(userId));
+    this.props.dispatch(
+      approvePendingRequest(userId, defaultPage, defaultPageSize)
+    );
   };
   notesStatus = (index) => {
     console.log("Notes!!!", index);
-  };
-  requestChangesStatus = (index) => {
-    console.log("Request Changes!!!", index);
-  };
-  editandApproveStatus = (index) => {
-    console.log("Edit and Approve!!!", index);
   };
 
   onPaginationChange = (limit) => {
@@ -138,7 +134,7 @@ class HostManagement extends Component {
   };
 
   render() {
-    const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
+    const token = localStorage.getItem("AUTHTOKEN");
     return (
       <div>
         {this.props.loading ? (
@@ -310,7 +306,7 @@ class HostManagement extends Component {
                           color="dark"
                           onClick={() =>
                             window.open(
-                              `http://localhost:3000/expert-details/${item.userId}`
+                              `http://localhost:3000/expert-details/${item.userId}?isAdmin=true`
                             )
                           }
                         >

@@ -11,7 +11,7 @@ const loading = (
   </div>
 );
 
-const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
+// const token = JSON.parse(localStorage.getItem("AUTHTOKEN"));
 
 const TheContent = () => {
   return (
@@ -20,7 +20,7 @@ const TheContent = () => {
         <Suspense fallback={loading}>
           <Switch>
             {routes.map((route, idx) => {
-              return token ? (
+              return (
                 route.component && (
                   <Route
                     key={idx}
@@ -34,8 +34,6 @@ const TheContent = () => {
                     )}
                   />
                 )
-              ) : (
-                <Redirect key={idx} to="/login" />
               );
             })}
             <Redirect from="/" to="/dashboard" />
