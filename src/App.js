@@ -23,6 +23,7 @@ import CategoryManagement from "./views/Categorymanagement/Categorymanagement";
 import BlogPostManagement from "./views/BlogPostManagement/BlogPostManagement";
 import ManageQuotes from "./views/ManageQuotes/ManageQuotes";
 import Giftcards from "./views/Giftcards/Giftcards";
+import Verification from "./views/verification/Verification";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -174,6 +175,10 @@ class App extends Component {
 
             <PrivateRoute exact path="/admin/Giftcards">
               <Giftcards />
+            </PrivateRoute>
+
+            <PrivateRoute exact path="/admin/verification">
+              <Verification />
             </PrivateRoute>
           </Switch>
         </React.Suspense>

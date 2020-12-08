@@ -10,11 +10,6 @@ import {
   CLabel,
   CSelect,
   CSpinner,
-  // CModal,
-  // CModalBody,
-  // CModalFooter,
-  // CTextarea,
-  // CModalHeader,
   CWidgetIcon,
   CPagination,
 } from "@coreui/react";
@@ -23,9 +18,12 @@ import NotesModal from "./NotesModal";
 import {
   getExperts,
   approvePendingRequest,
+  getCountries,
+  getCategories,
 } from "../../redux/actions/hostManagementActions";
 import RequestExpert from "../requestExpert/requestExpert";
 import CIcon from "@coreui/icons-react";
+import "./HostManagement.css";
 
 const fields = [
   // { key: "userId", _style: { width: "2%" } },
@@ -44,7 +42,7 @@ const fields = [
 ];
 
 const defaultPage = 1;
-const defaultPageSize = 5;
+const defaultPageSize = 10;
 
 class HostManagement extends Component {
   state = {
@@ -55,10 +53,22 @@ class HostManagement extends Component {
     formShow: false,
     details: [],
     OpenRequest: false,
+    notesData: "",
+    notesBy: {},
+    status: "all",
+    countries: [],
   };
   componentDidMount() {
     this.props.dispatch(getExperts(defaultPage, defaultPageSize));
+    this.props.dispatch(getCountries());
+    this.props.dispatch(getCategories());
   }
+
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.countries !== this.props.countries) {
+  //     this.setState({ countries: this.props.countries });
+  //   }
+  // }
 
   toggle = () => {
     this.setState({ setModal: !this.state.setModal });
@@ -67,6 +77,7 @@ class HostManagement extends Component {
   OpenRequestModal = () => {
     this.setState({ OpenRequest: !this.state.OpenRequest });
   };
+
   toggleDetails = (index) => {
     const position = this.state.details.indexOf(index);
     let newDetails = this.state.details.slice();
@@ -86,21 +97,23 @@ class HostManagement extends Component {
       approvePendingRequest(userId, defaultPage, defaultPageSize)
     );
   };
-  notesStatus = (index) => {
-    console.log("Notes!!!", index);
-  };
 
   onPaginationChange = (limit) => {
     this.setState({ currentPageSize: limit });
-    this.props.dispatch(getExperts(this.state.currentPage, limit));
+    this.props.dispatch(
+      getExperts(this.state.currentPage, limit, this.state.status)
+    );
   };
 
   setActivePage = (i) => {
-    this.props.dispatch(getExperts(i, this.state.currentPageSize));
+    this.props.dispatch(
+      getExperts(i, this.state.currentPageSize, this.state.status)
+    );
     this.setState({ currentPage: i });
   };
 
   onStatusChange = (value) => {
+    this.setState({ status: value });
     if (value !== "all") {
       this.props.dispatch(
         getExperts(this.state.currentPage, this.state.currentPageSize, value)
@@ -110,6 +123,19 @@ class HostManagement extends Component {
         getExperts(this.state.currentPage, this.state.currentPageSize)
       );
     }
+  };
+
+  onCountryChange = (value) => {
+    this.setState({ country: value });
+    this.props.dispatch(
+      getExperts(
+        this.state.currentPage,
+        this.state.currentPageSize,
+        null,
+        null,
+        value
+      )
+    );
   };
 
   onSortByChange = (value) => {
@@ -185,7 +211,7 @@ class HostManagement extends Component {
                 </CCol>
               </CRow>
               <CFormGroup row>
-                <CCol xs="12" md="3" className="col-sm-4">
+                <CCol>
                   <CLabel htmlFor="selectSm">Sort By</CLabel>
                   <CSelect
                     custom
@@ -201,52 +227,99 @@ class HostManagement extends Component {
                     <option value="createdAt">Sign up date</option>
                   </CSelect>
                 </CCol>
-                <CCol xs="12" md="3" className="col-sm-4">
+                <CCol>
                   <CLabel htmlFor="selectSm">Filter by host recuiter</CLabel>
                   <CSelect
                     custom
                     size="sm"
                     className="select-box"
                     name="selectSm"
-                    id="SelectLm"
                   >
-                    <option value="0">All</option>
+                    <option value="all">All</option>
+                    <option value="mansi">Mansi</option>
+                    <option value="maharudra">Maharudra</option>
                   </CSelect>
                 </CCol>
-                <CCol xs="12" md="3" className="col-sm-4">
-                  <CLabel htmlFor="selectSm">Filter by status</CLabel>
+                <CCol>
+                  <CLabel htmlFor="selectSm">Filter by Status</CLabel>
                   <CSelect
                     custom
                     size="sm"
                     className="select-box"
                     name="selectSm"
-                    id="SelectLm"
                     onChange={(e) => {
                       this.onStatusChange(e.target.value);
                     }}
                   >
                     <option value="all">All</option>
-                    <option value="approved">Approved</option>
-                    <option value="in-progress">In-progress</option>
-                    <option value="pending">Pending</option>
+                    <option value="approved">
+                      Approved ({this.props.approvedRequest})
+                    </option>
+                    <option value="in-progress">
+                      In-progress ({this.props.inProgressRequest})
+                    </option>
+                    <option value="pending">
+                      Pending ({this.props.pendingPequest})
+                    </option>
                   </CSelect>
                 </CCol>
-                <CCol xs="12" md="3" className="col-sm-4">
-                  <CButton
-                    variant="outline"
+                <CCol>
+                  <CLabel htmlFor="selectSm">Filter by Country</CLabel>
+                  <CSelect
+                    custom
                     size="sm"
-                    className="mr-2"
-                    target="_blank"
-                    onClick={() => {
-                      window.open(
-                        `http://192.168.100.39:8000/${this.props.url}`
-                      );
+                    className="select-box"
+                    name="selectSm"
+                    onChange={(e) => {
+                      this.onCountryChange(e.target.value);
                     }}
                   >
-                    Export List as CSV
-                  </CButton>
+                    <option value="all">All</option>
+                    {this.props.countries.map((c, i) => {
+                      return (
+                        <option key={i} value={c.country._id}>
+                          {c.country.name} ({c.count})
+                        </option>
+                      );
+                    })}
+                  </CSelect>
+                </CCol>
+                <CCol>
+                  <CLabel htmlFor="selectSm">Filter by category</CLabel>
+                  <CSelect
+                    custom
+                    size="sm"
+                    className="select-box"
+                    // onChange={(e) => {
+                    //   this.onStatusChange(e.target.value);
+                    // }}
+                  >
+                    <option value="all">All</option>
+                    {this.props.categories &&
+                      this.props.categories.map((c, i) => {
+                        return (
+                          <option key={i} value={c._id}>
+                            {c.name}
+                            {/* ({c.count}) */}
+                          </option>
+                        );
+                      })}
+                  </CSelect>
                 </CCol>
               </CFormGroup>
+              <CCol className="btn-export-list">
+                <CButton
+                  variant="outline"
+                  size="sm"
+                  className="mr-2"
+                  target="_blank"
+                  onClick={() => {
+                    window.open(`http://192.168.100.23:8000/${this.props.url}`);
+                  }}
+                >
+                  Export List as CSV
+                </CButton>
+              </CCol>
 
               <CDataTable
                 items={this.props.hostData}
@@ -289,6 +362,8 @@ class HostManagement extends Component {
                           id="approveButton"
                           style={{
                             color: "#fff",
+                            cursor:
+                              item.status === "approved" ? "none" : "pointer",
                             backgroundColor:
                               item.status === "approved" ? "green" : "red",
                           }}
@@ -347,6 +422,8 @@ class HostManagement extends Component {
                             this.setState({
                               notesModal: true,
                               hostId: item.userId,
+                              notesData: item.notes,
+                              notesBy: item.notesBy,
                             });
                           }}
                         >
@@ -369,6 +446,10 @@ class HostManagement extends Component {
               <NotesModal
                 id={this.state.hostId}
                 onClose={this.onNotesModalClose}
+                notesData={this.state.notesData}
+                notesBy={this.state.notesBy}
+                page={defaultPage}
+                pageSize={defaultPageSize}
               />
             ) : null}
           </div>
@@ -393,6 +474,8 @@ const mapStateToProps = (state) => {
     approveRequestMessage: state.hostManagement.approveRequestMessage,
     addNotesMessage: state.hostManagement.addNotesMessage,
     url: state.hostManagement.url,
+    countries: state.hostManagement.countries,
+    categories: state.hostManagement.categories,
   };
 };
 

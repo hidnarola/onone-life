@@ -18,6 +18,7 @@ import {
 import Moment from "react-moment";
 import { getMembers } from "../../redux/actions/memberManagementActions";
 import { BASE_URL } from "../../constants/Constants";
+import "../HostManagement/HostManagement.css";
 
 const fields = [
   { key: "userId" },
@@ -171,7 +172,7 @@ class MemberManagement extends Component {
                   <option value="host">Host</option>
                 </CSelect>
               </CCol>
-              <CCol xs="12" md="3" className="col-sm-4">
+              <CCol xs="12" md="3" className="col-sm-4 btn-export-list">
                 <CButton
                   variant="outline"
                   size="sm"

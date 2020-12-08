@@ -7,16 +7,24 @@ import {
   CModalFooter,
   CModalHeader,
   CTextarea,
+  CToast,
+  CToaster,
+  CToastBody,
 } from "@coreui/react";
 import axios from "axios";
-// import axios from "../../axios";
 import { BASE_URL } from "../../constants/Constants";
 import { addNotes } from "../../redux/actions/hostManagementActions";
 
 class NotesModal extends Component {
   state = {
     loading: false,
+    notes: "",
   };
+
+  componentDidMount() {
+    this.setState({ notes: this.props.notesData });
+  }
+
   async saveNotes(id, notes) {
     this.setState({ loading: true });
     try {
@@ -25,7 +33,9 @@ class NotesModal extends Component {
         notes,
       });
       //   console.log(res);
-      this.props.dispatch(addNotes(res.data.message));
+      this.props.dispatch(
+        addNotes(res.data.message, this.props.page, this.props.pageSize)
+      );
     } catch (error) {
       console.log("Error", error);
     }
@@ -40,7 +50,9 @@ class NotesModal extends Component {
           <CTextarea
             onChange={(e) => this.setState({ notes: e.target.value })}
             placeholder="Add notes here..!"
+            value={this.state.notes}
           ></CTextarea>
+          <h6>Last Updated By: {this.props.notesBy.email} </h6>
         </CModalBody>
         <CModalFooter>
           <CButton
@@ -54,9 +66,25 @@ class NotesModal extends Component {
             Cancel
           </CButton>
         </CModalFooter>
+        <CToaster position="top-right">
+          <CToast
+            key="toast"
+            show={this.props.addNotesMessage !== undefined ? true : false}
+            autohide="3000"
+            // fade={toast.fade}
+          >
+            <CToastBody>{this.props.addNotesMessage}</CToastBody>
+          </CToast>
+        </CToaster>
       </CModal>
     );
   }
 }
 
-export default connect()(NotesModal);
+const mapStateToProps = (state) => {
+  return {
+    addNotesMessage: state.hostManagement.addNotesMessage,
+  };
+};
+
+export default connect(mapStateToProps)(NotesModal);

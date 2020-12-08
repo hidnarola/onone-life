@@ -63,6 +63,10 @@ const ManageQuotes = React.lazy(() =>
 );
 const Giftcards = React.lazy(() => import("./views/Giftcards/Giftcards"));
 
+const Verification = React.lazy(() =>
+  import("./views/verification/Verification")
+);
+
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
@@ -169,6 +173,11 @@ const routes = [
     name:
       "Gift cards/ discounts for admin to issue by category or to specific users etc",
     component: Giftcards,
+  },
+  {
+    path: "/admin/verification",
+    name: "ID verification and Education and Certification Verification",
+    component: Verification,
   },
 ];
 

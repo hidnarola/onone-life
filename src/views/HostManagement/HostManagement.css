@@ -1,0 +1,26 @@
+.btn-export-list button {
+  background: #0082f9;
+  border-radius: 3px;
+  width: 167px;
+  height: 36px;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  transition: ease-in-out 0.5s;
+  margin-top: 21px;
+  border: 1px solid #0082f9;
+}
+.btn-export-list button:hover {
+  background: transparent;
+  color: #0082f9;
+}
+.btn-export-list {
+  margin-right: 180px;
+  margin-bottom: -42px;
+  padding: 0;
+}

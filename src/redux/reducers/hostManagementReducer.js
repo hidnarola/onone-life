@@ -7,6 +7,7 @@ import {
 const initialState = {
   hostData: [],
   dataLoaded: false,
+  countries: [],
 };
 
 const hostManagementReducer = (state = initialState, { type, payload }) => {
@@ -31,6 +32,16 @@ const hostManagementReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         addNotesMessage: payload.addNotesMessage,
+      };
+    case "GET_COUNTRIES":
+      return {
+        ...state,
+        countries: payload,
+      };
+    case "GET_CATEGORIES":
+      return {
+        ...state,
+        categories: payload,
       };
     default:
       return state;

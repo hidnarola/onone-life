@@ -15,6 +15,7 @@ import {
   CModalBody,
   CModalFooter,
   CModalHeader,
+  CInputFile,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
@@ -150,7 +151,7 @@ class CategoryManagement extends Component {
               items={usersData}
               fields={fields}
               // columnFilter
-              //    / tableFilter
+              // tableFilter
               // footer
               // itemsPerPageSelect
               //  itemsPerPage={5}
@@ -193,9 +194,9 @@ class CategoryManagement extends Component {
                         name="selectSm"
                         id="SelectLm"
                       >
-                        <option value="0">choose category </option>
+                        <option value="0">Choose Status</option>
                         <option value="1">Active</option>
-                        <option value="2"> De-Active</option>
+                        <option value="2">De-Active</option>
                       </CSelect>
                     </td>
                   );
@@ -234,20 +235,49 @@ class CategoryManagement extends Component {
                   <CInput id="company" placeholder="Enter your Category Name" />
                 </CFormGroup>
 
-                <CFormGroup>
-                  <CLabel htmlFor="vat">Category Level </CLabel>
-                  <CSelect
-                    custom
-                    size="sm"
-                    className="select-box"
-                    name="selectSm"
-                    id="SelectLm"
-                  >
-                    <option value="">Select</option>
-                    <option value="0">Main category</option>
-                    <option value="1">Sub category</option>
-                    <option value="1">Topic</option>
-                  </CSelect>
+                <CFormGroup row>
+                  <CCol>
+                    <CLabel htmlFor="vat">Category Level </CLabel>
+                    <CSelect
+                      custom
+                      size="sm"
+                      className="select-box"
+                      name="selectSm"
+                    >
+                      <option value="">Select</option>
+                      <option value="0">Main category</option>
+                      <option value="1">Sub category</option>
+                      <option value="1">Topic</option>
+                    </CSelect>
+                  </CCol>
+                  <CCol>
+                    <CLabel htmlFor="vat">Parent Category </CLabel>
+                    <CSelect
+                      custom
+                      size="sm"
+                      className="select-box"
+                      name="selectSm"
+                    >
+                      <option value="">Select</option>
+                      <option value="0">Category 1</option>
+                      <option value="1">Category 2</option>
+                      <option value="1">Category 3</option>
+                    </CSelect>
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
+                  <CLabel col md={3}>
+                    Category Icon
+                  </CLabel>
+                  {/* <CCol>
+                    <CInputFile custom id="custom-file-input" />
+                    <CLabel htmlFor="custom-file-input" variant="custom-file">
+                      Choose file...
+                    </CLabel>
+                  </CCol> */}
+                  <CCol xs="12" md="9">
+                    <CInputFile id="file-input" name="file-input" />
+                  </CCol>
                 </CFormGroup>
                 <CFormGroup row className="my-0">
                   <CCol xs="8">
@@ -281,7 +311,6 @@ class CategoryManagement extends Component {
                       }}
                       onClick={this.showForm}
                     >
-                      {" "}
                       Submit
                     </CButton>
                   </CCol>

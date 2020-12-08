@@ -2,7 +2,9 @@ import axios from "axios";
 import { GET_EXPERTS_DATA, APPROVE_PENDING_REQUEST, ADD_NOTES } from "./index";
 import { BASE_URL } from "../../constants/Constants";
 
-export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
+export const getExperts = (page, limit, status, sortBy, country) => async (
+  dispatch
+) => {
   const obj = {
     start: (page - 1) * limit,
     length: limit,
@@ -12,6 +14,9 @@ export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
   }
   if (sortBy) {
     obj.sort_by = sortBy;
+  }
+  if (country) {
+    obj.country = country;
   }
   const res = await axios.post(`${BASE_URL}/admin/expert`, obj);
 
@@ -30,6 +35,10 @@ export const getExperts = (page, limit, status, sortBy) => async (dispatch) => {
       signupDate: host.createdAt,
       submission: "2",
       status: host.userData.status,
+      notes: host.userData.notes,
+      notesBy: host.userData.notesBy,
+      education: host.userData.education,
+      certifications: host.userData.certifications,
     };
   });
 
@@ -65,9 +74,28 @@ export const approvePendingRequest = (userId, page, pageSize) => async (
   });
 };
 
-export const addNotes = (message) => async (dispatch) => {
+export const addNotes = (message, page, pageSize) => async (dispatch) => {
+  dispatch(getExperts(page, pageSize));
   dispatch({
     type: ADD_NOTES,
     payload: { addNotesMessage: message },
+  });
+};
+
+export const getCountries = () => async (dispatch) => {
+  const res = await axios.get(`${BASE_URL}/countryWithCount`);
+
+  dispatch({
+    type: "GET_COUNTRIES",
+    payload: res.data.country,
+  });
+};
+
+export const getCategories = () => async (dispatch) => {
+  const res = await axios.get(`${BASE_URL}/category`);
+
+  dispatch({
+    type: "GET_CATEGORIES",
+    payload: res.data.category,
   });
 };
