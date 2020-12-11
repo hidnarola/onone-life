@@ -138,7 +138,7 @@ export default [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "ID Verification",
+    name: "Verification",
     to: "/admin/verification",
     icon: "cil-check-circle",
   },

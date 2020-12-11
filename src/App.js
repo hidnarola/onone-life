@@ -24,6 +24,8 @@ import BlogPostManagement from "./views/BlogPostManagement/BlogPostManagement";
 import ManageQuotes from "./views/ManageQuotes/ManageQuotes";
 import Giftcards from "./views/Giftcards/Giftcards";
 import Verification from "./views/verification/Verification";
+import EducationAndCertifications from "./views/EducationAndCertifications/EducationAndCertifications";
+import IdVerification from "./views/IdVerification/IdVerification";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -179,6 +181,14 @@ class App extends Component {
 
             <PrivateRoute exact path="/admin/verification">
               <Verification />
+            </PrivateRoute>
+
+            <PrivateRoute exact path="/admin/education-and-certifications/:id">
+              <EducationAndCertifications />
+            </PrivateRoute>
+
+            <PrivateRoute exact path="/admin/id-verification/:id">
+              <IdVerification />
             </PrivateRoute>
           </Switch>
         </React.Suspense>

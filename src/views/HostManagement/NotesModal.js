@@ -12,6 +12,7 @@ import {
   CToastBody,
 } from "@coreui/react";
 import axios from "axios";
+import Moment from "moment";
 import { BASE_URL } from "../../constants/Constants";
 import { addNotes } from "../../redux/actions/hostManagementActions";
 
@@ -52,7 +53,12 @@ class NotesModal extends Component {
             placeholder="Add notes here..!"
             value={this.state.notes}
           ></CTextarea>
-          <h6>Last Updated By: {this.props.notesBy.email} </h6>
+          <div style={{ display: "inline-block" }}>
+            <h6>Last Updated By: {this.props.notesBy.email}</h6>
+            <h6>
+              {Moment(this.props.notesBy.updatedAt).format("Do MMM YYYY H:mma")}
+            </h6>
+          </div>
         </CModalBody>
         <CModalFooter>
           <CButton
@@ -70,7 +76,7 @@ class NotesModal extends Component {
           <CToast
             key="toast"
             show={this.props.addNotesMessage !== undefined ? true : false}
-            autohide="3000"
+            autohide={3000}
             // fade={toast.fade}
           >
             <CToastBody>{this.props.addNotesMessage}</CToastBody>

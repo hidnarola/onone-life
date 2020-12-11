@@ -98,13 +98,20 @@ class Verification extends Component {
                           size="sm"
                           className="mr-2"
                           color="dark"
-                          //   onClick={() =>
-                          //     window.open(
-                          //       `http://localhost:3000/expert-details/${item.userId}?isAdmin=true`
-                          //     )
-                          //   }
+                          onClick={() =>
+                            this.props.history.push(
+                              `/admin/id-verification/${item.userId}`
+                            )
+                          }
+                          // onClick={() =>
+                          //   this.setState({
+                          //     openIdVerification: true,
+                          //     educationData: item.education,
+                          //     certificationData: item.certifications,
+                          //   })
+                          // }
                         >
-                          Approve ID Verification
+                          Verify ID Verification
                         </CButton>
                         <CButton
                           variant="outline"
@@ -112,14 +119,12 @@ class Verification extends Component {
                           className="mr-2"
                           color="dark"
                           onClick={() =>
-                            this.setState({
-                              openIdVerification: true,
-                              educationData: item.education,
-                              certificationData: item.certifications,
-                            })
+                            this.props.history.push(
+                              `/admin/education-and-certifications/${item.userId}`
+                            )
                           }
                         >
-                          Approve Education and Certification
+                          Verify Education and Certification
                         </CButton>
                       </td>
                     );
@@ -141,8 +146,8 @@ class Verification extends Component {
           <IdVerificationModal
             id={this.state.hostId}
             onClose={this.onNotesModalClose}
-            educationData={this.state.educationData}
-            certificationData={this.state.certificationData}
+            // educationData={this.state.educationData}
+            // certificationData={this.state.certificationData}
             page={defaultPage}
             pageSize={defaultPageSize}
           />

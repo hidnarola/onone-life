@@ -1,4 +1,6 @@
 import React from "react";
+import EducationAndCertifications from "./views/EducationAndCertifications/EducationAndCertifications";
+import IdVerification from "./views/IdVerification/IdVerification";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const Widgets = React.lazy(() => import("./views/widgets/Widgets"));
@@ -176,8 +178,18 @@ const routes = [
   },
   {
     path: "/admin/verification",
-    name: "ID verification and Education and Certification Verification",
+    name: "Verification",
     component: Verification,
+  },
+  {
+    path: "/admin/education-and-certifications/:id",
+    name: "Education and Certifications",
+    component: EducationAndCertifications,
+  },
+  {
+    path: "/admin/id-verification/:id",
+    name: "ID Verification",
+    component: IdVerification,
   },
 ];
 

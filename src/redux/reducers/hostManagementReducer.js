@@ -21,6 +21,7 @@ const hostManagementReducer = (state = initialState, { type, payload }) => {
         inProgressRequest: payload.inProgressRequest,
         pendingPequest: payload.pendingPequest,
         approvedRequest: payload.approvedRequest,
+        totalRequest: payload.totalRequest,
         url: payload.url,
       };
     case APPROVE_PENDING_REQUEST:
@@ -42,6 +43,11 @@ const hostManagementReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         categories: payload,
+      };
+    case "GET_EMPLOYEE":
+      return {
+        ...state,
+        employees: payload,
       };
     default:
       return state;

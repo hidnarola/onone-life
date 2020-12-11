@@ -37,6 +37,7 @@ const Login = () => {
 
   const errorMessage = useSelector((state) => state.auth.errorMessage);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  console.log("isLoggedIn: ", isLoggedIn);
 
   const onVerify = (invisible) => (recaptchaToken) => {
     // console.log("Token: ", recaptchaToken);

@@ -12,14 +12,17 @@ import {
   CSpinner,
   CWidgetIcon,
   CPagination,
+  CInput,
 } from "@coreui/react";
 import Moment from "react-moment";
+import moment from "moment";
 import NotesModal from "./NotesModal";
 import {
   getExperts,
   approvePendingRequest,
   getCountries,
   getCategories,
+  getEmployee,
 } from "../../redux/actions/hostManagementActions";
 import RequestExpert from "../requestExpert/requestExpert";
 import CIcon from "@coreui/icons-react";
@@ -30,6 +33,7 @@ const fields = [
   { key: "name", _style: { width: "auto" } },
   { key: "emailAddress", _style: { width: "auto" } },
   { key: "category", _style: { width: "auto" } },
+  { key: "brandName", _style: { width: "auto" } },
   { key: "signupDate", _style: { width: "auto" } },
   { key: "submission", _style: { width: "auto" } },
   {
@@ -55,18 +59,28 @@ class HostManagement extends Component {
     OpenRequest: false,
     notesData: "",
     notesBy: {},
-    status: "all",
+    status: "",
     countries: [],
+    sortBy: "",
+    host: "",
+    category: "",
+    searching: false,
+    startDate: "2020-06-12",
+    endDate: moment().format("YYYY-MM-DD"),
   };
   componentDidMount() {
     this.props.dispatch(getExperts(defaultPage, defaultPageSize));
     this.props.dispatch(getCountries());
     this.props.dispatch(getCategories());
+    this.props.dispatch(getEmployee());
   }
 
   // componentDidUpdate(prevProps) {
-  //   if (prevProps.countries !== this.props.countries) {
-  //     this.setState({ countries: this.props.countries });
+  //   if (prevProps !== this.props) {
+  //     this.setState({
+  //       countries: this.props.countries,
+  //       host: this.props.employee,
+  //     });
   //   }
   // }
 
@@ -101,28 +115,73 @@ class HostManagement extends Component {
   onPaginationChange = (limit) => {
     this.setState({ currentPageSize: limit });
     this.props.dispatch(
-      getExperts(this.state.currentPage, limit, this.state.status)
+      getExperts(
+        this.state.currentPage,
+        limit,
+        this.state.status,
+        this.state.sortBy,
+        this.state.country,
+        this.state.host
+      )
     );
   };
 
   setActivePage = (i) => {
     this.props.dispatch(
-      getExperts(i, this.state.currentPageSize, this.state.status)
+      getExperts(
+        i,
+        this.state.currentPageSize,
+        this.state.status,
+        this.state.sortBy,
+        this.state.country,
+        this.state.host
+      )
     );
     this.setState({ currentPage: i });
   };
 
   onStatusChange = (value) => {
     this.setState({ status: value });
-    if (value !== "all") {
-      this.props.dispatch(
-        getExperts(this.state.currentPage, this.state.currentPageSize, value)
-      );
-    } else {
-      this.props.dispatch(
-        getExperts(this.state.currentPage, this.state.currentPageSize)
-      );
-    }
+    this.props.dispatch(
+      getExperts(
+        this.state.currentPage,
+        this.state.currentPageSize,
+        value,
+        this.state.sortBy,
+        this.state.country,
+        this.state.host
+      )
+    );
+  };
+
+  onHostChange = (value) => {
+    this.setState({ host: value });
+    this.props.dispatch(
+      getExperts(
+        this.state.currentPage,
+        this.state.currentPageSize,
+        this.state.status,
+        this.state.sortBy,
+        this.state.country,
+        value
+      )
+    );
+  };
+
+  onCategoryChange = (value) => {
+    console.log("value: ", value);
+    this.setState({ category: value });
+    this.props.dispatch(
+      getExperts(
+        this.state.currentPage,
+        this.state.currentPageSize,
+        this.state.status,
+        this.state.sortBy,
+        this.state.country,
+        this.state.host,
+        value
+      )
+    );
   };
 
   onCountryChange = (value) => {
@@ -131,9 +190,10 @@ class HostManagement extends Component {
       getExperts(
         this.state.currentPage,
         this.state.currentPageSize,
-        null,
-        null,
-        value
+        this.state.status,
+        this.state.sortBy,
+        value,
+        this.state.host
       )
     );
   };
@@ -144,10 +204,84 @@ class HostManagement extends Component {
         getExperts(
           this.state.currentPage,
           this.state.currentPageSize,
-          null,
+          this.state.status,
+          value,
+          this.state.country,
+          this.state.host
+        )
+      );
+    }
+  };
+
+  handleChangeSearch = (value) => {
+    this.setState({ searching: true });
+    if (value.length > 2) {
+      this.props.dispatch(
+        getExperts(
+          this.state.currentPage,
+          this.state.currentPageSize,
+          this.state.status,
+          this.state.sortBy,
+          this.state.country,
+          this.state.host,
+          this.state.category,
           value
         )
       );
+    }
+    if (value.length < 2 && this.state.searching === true) {
+      this.props.dispatch(
+        getExperts(
+          this.state.currentPage,
+          this.state.currentPageSize,
+          this.state.status,
+          this.state.sortBy,
+          this.state.country,
+          this.state.host,
+          this.state.category
+        )
+      );
+      this.setState({ searching: false });
+    }
+  };
+
+  handleChangeSearchByDate = (key, value) => {
+    console.log("value: ", key, value);
+    if (key === "startDate") {
+      this.setState({ startDate: value });
+      this.props.dispatch(
+        getExperts(
+          this.state.currentPage,
+          this.state.currentPageSize,
+          this.state.status,
+          this.state.sortBy,
+          this.state.country,
+          this.state.host,
+          this.state.category,
+          "",
+          value,
+          this.state.endDate
+        )
+      );
+    }
+    if (key === "endDate") {
+      this.setState({ endDate: value });
+      if (this.state.startDate) {
+        this.props.dispatch(
+          getExperts(
+            this.state.currentPage,
+            this.state.currentPageSize,
+            this.state.status,
+            this.state.sortBy,
+            this.state.country,
+            this.state.host,
+            this.state.category,
+            "",
+            this.state.startDate,
+            value
+          )
+        );
+      }
     }
   };
 
@@ -218,7 +352,6 @@ class HostManagement extends Component {
                     size="sm"
                     className="select-box"
                     name="selectSm"
-                    id="SelectLm"
                     onChange={(e) => {
                       this.onSortByChange(e.target.value);
                     }}
@@ -228,16 +361,25 @@ class HostManagement extends Component {
                   </CSelect>
                 </CCol>
                 <CCol>
-                  <CLabel htmlFor="selectSm">Filter by host recuiter</CLabel>
+                  <CLabel htmlFor="selectSm">Filter by Host Recuiter</CLabel>
                   <CSelect
                     custom
                     size="sm"
                     className="select-box"
                     name="selectSm"
+                    onChange={(e) => {
+                      this.onHostChange(e.target.value);
+                    }}
                   >
-                    <option value="all">All</option>
-                    <option value="mansi">Mansi</option>
-                    <option value="maharudra">Maharudra</option>
+                    <option value="">All ({this.props.totalRequest})</option>
+                    {this.props.employees &&
+                      this.props.employees.map((e, i) => {
+                        return (
+                          <option key={i} value={e.employee.userId}>
+                            {e.employee.firstName} ({e.count})
+                          </option>
+                        );
+                      })}
                   </CSelect>
                 </CCol>
                 <CCol>
@@ -251,7 +393,7 @@ class HostManagement extends Component {
                       this.onStatusChange(e.target.value);
                     }}
                   >
-                    <option value="all">All</option>
+                    <option value="">All ({this.props.totalRequest})</option>
                     <option value="approved">
                       Approved ({this.props.approvedRequest})
                     </option>
@@ -274,7 +416,7 @@ class HostManagement extends Component {
                       this.onCountryChange(e.target.value);
                     }}
                   >
-                    <option value="all">All</option>
+                    <option value="">All ({this.props.totalRequest})</option>
                     {this.props.countries.map((c, i) => {
                       return (
                         <option key={i} value={c.country._id}>
@@ -285,61 +427,108 @@ class HostManagement extends Component {
                   </CSelect>
                 </CCol>
                 <CCol>
-                  <CLabel htmlFor="selectSm">Filter by category</CLabel>
+                  <CLabel htmlFor="selectSm">Filter by Category</CLabel>
                   <CSelect
                     custom
                     size="sm"
                     className="select-box"
-                    // onChange={(e) => {
-                    //   this.onStatusChange(e.target.value);
-                    // }}
+                    onChange={(e) => {
+                      this.onCategoryChange(e.target.value);
+                    }}
                   >
-                    <option value="all">All</option>
+                    <option value="">All ({this.props.totalRequest})</option>
                     {this.props.categories &&
                       this.props.categories.map((c, i) => {
                         return (
-                          <option key={i} value={c._id}>
-                            {c.name}
-                            {/* ({c.count}) */}
+                          <option key={i} value={c.name}>
+                            {c.name}({c.count})
                           </option>
                         );
                       })}
                   </CSelect>
                 </CCol>
               </CFormGroup>
-              <CCol className="btn-export-list">
-                <CButton
-                  variant="outline"
+
+              <div style={{ textAlign: "right" }}>
+                <span>Search </span>
+                <CInput
+                  className="mr-3"
+                  type="search"
+                  placeholder="Enter here.."
+                  autoComplete="search"
+                  style={{ display: "inline-block", width: "100px" }}
+                  onChange={(e) => this.handleChangeSearch(e.target.value)}
+                />
+                <span>Start Date</span>
+                <CInput
+                  className="mr-3"
+                  type="date"
+                  placeholder="Enter here.."
+                  style={{ display: "inline-block", width: "150px" }}
+                  value={this.state.startDate}
+                  onChange={(e) =>
+                    this.handleChangeSearchByDate("startDate", e.target.value)
+                  }
+                />
+                <span>End Date</span>
+                <CInput
+                  className="mr-3"
+                  type="date"
+                  style={{ display: "inline-block", width: "150px" }}
+                  value={this.state.endDate}
+                  onChange={(e) =>
+                    this.handleChangeSearchByDate("endDate", e.target.value)
+                  }
+                />
+                <span className="btn-export-list">
+                  <CButton
+                    variant="outline"
+                    size="sm"
+                    className="mr-3"
+                    target="_blank"
+                    onClick={() => {
+                      window.open(
+                        `http://192.168.100.23:8000/${this.props.url}`
+                      );
+                    }}
+                  >
+                    Export List as CSV
+                  </CButton>
+                </span>
+
+                <span>Items per page: </span>
+                <CSelect
+                  custom
                   size="sm"
-                  className="mr-2"
-                  target="_blank"
-                  onClick={() => {
-                    window.open(`http://192.168.100.23:8000/${this.props.url}`);
+                  style={{ display: "inline-block", width: "100px" }}
+                  className="select-box"
+                  name="selectSm"
+                  value={this.state.currentPageSize}
+                  onChange={(e) => {
+                    this.onPaginationChange(Number(e.target.value));
                   }}
                 >
-                  Export List as CSV
-                </CButton>
-              </CCol>
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={15}>15</option>
+                  <option value={20}>20</option>
+                </CSelect>
+              </div>
 
               <CDataTable
                 items={this.props.hostData}
                 fields={fields}
-                // tableFilter
-                itemsPerPageSelect
-                itemsPerPage={defaultPageSize}
+                loading={this.props.tableDataLoaded ? false : true}
+                // itemsPerPageSelect
+                itemsPerPage={10}
                 hover
-                // sorter
                 pagination={false}
                 onPaginationChange={(e) => this.onPaginationChange(e)}
                 scopedSlots={{
                   name: (item, index) => {
                     return (
                       <td className="py-2">
-                        <CLink
-                          to={`/admin/hostdetails/${item.userId}`}
-                          // href="http://localhost:3000/dashboard"
-                          // target="_blank"
-                        >
+                        <CLink to={`/admin/hostdetails/${item.userId}`}>
                           {item.name}
                         </CLink>
                       </td>
@@ -436,11 +625,13 @@ class HostManagement extends Component {
               />
             </>
             <div className={"mt-2"}>
-              <CPagination
-                activePage={this.state.currentPage}
-                pages={this.props.pages}
-                onActivePageChange={(i) => this.setActivePage(i)}
-              ></CPagination>
+              {this.props.hostData.length > 0 ? (
+                <CPagination
+                  activePage={this.state.currentPage}
+                  pages={this.props.pages}
+                  onActivePageChange={(i) => this.setActivePage(i)}
+                ></CPagination>
+              ) : null}
             </div>
             {this.state.notesModal ? (
               <NotesModal
@@ -472,10 +663,12 @@ const mapStateToProps = (state) => {
     pendingPequest: state.hostManagement.pendingPequest,
     approvedRequest: state.hostManagement.approvedRequest,
     approveRequestMessage: state.hostManagement.approveRequestMessage,
+    totalRequest: state.hostManagement.totalRequest,
     addNotesMessage: state.hostManagement.addNotesMessage,
     url: state.hostManagement.url,
     countries: state.hostManagement.countries,
     categories: state.hostManagement.categories,
+    employees: state.hostManagement.employees,
   };
 };
 

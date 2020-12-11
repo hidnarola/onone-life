@@ -17,6 +17,8 @@ export const logIn = (email, password, token) => async (dispatch) => {
       password: password,
       googleRecaptchaToken: token,
     });
+    // debugger;
+    console.log("res: ", res.data);
 
     if (res.data.token) {
       localStorage.setItem("AUTHTOKEN", res.data.token);
@@ -32,7 +34,8 @@ export const logIn = (email, password, token) => async (dispatch) => {
       });
     }
   } catch (error) {
-    // console.log("Error", error);
+    // debugger;
+    console.log("Error", error);
     dispatch({
       type: LOGIN_FAILED,
       payload: { errorMessage: "Something went wrong" },
