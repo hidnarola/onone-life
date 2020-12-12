@@ -18,3 +18,38 @@
   background: transparent;
   color: #0082f9;
 }
+
+.search-area {
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-area span {
+  margin-right: 5px;
+}
+
+span.btn-export-list button {
+  margin-right: 10px !important;
+}
+
+.search-area input {
+  padding: 0 6px;
+  font-size: 13px;
+}
+.search-area input.input-search-ad {
+  width: 300px;
+  max-width: 300px;
+  min-width: 140px;
+}
+.search-area select.custom-select {
+  height: 34px;
+  min-width: 60px;
+  max-width: 60px;
+  padding: 0 5px;
+}
+
+span.items-per-page {
+  margin-left: auto;
+}

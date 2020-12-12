@@ -449,10 +449,25 @@ class HostManagement extends Component {
                 </CCol>
               </CFormGroup>
 
-              <div style={{ textAlign: "right" }}>
+              <div style={{ textAlign: "right" }} className="search-area">
+                <span className="btn-export-list">
+                  <CButton
+                    variant="outline"
+                    size="sm"
+                    className="mr-3"
+                    target="_blank"
+                    onClick={() => {
+                      window.open(
+                        `http://192.168.100.23:8000/${this.props.url}`
+                      );
+                    }}
+                  >
+                    Export List as CSV
+                  </CButton>
+                </span>
                 <span>Search </span>
                 <CInput
-                  className="mr-3"
+                  className="mr-3 input-search-ad"
                   type="search"
                   placeholder="Enter here.."
                   autoComplete="search"
@@ -480,23 +495,8 @@ class HostManagement extends Component {
                     this.handleChangeSearchByDate("endDate", e.target.value)
                   }
                 />
-                <span className="btn-export-list">
-                  <CButton
-                    variant="outline"
-                    size="sm"
-                    className="mr-3"
-                    target="_blank"
-                    onClick={() => {
-                      window.open(
-                        `http://192.168.100.23:8000/${this.props.url}`
-                      );
-                    }}
-                  >
-                    Export List as CSV
-                  </CButton>
-                </span>
 
-                <span>Items per page: </span>
+                <span className="items-per-page">Items per page: </span>
                 <CSelect
                   custom
                   size="sm"

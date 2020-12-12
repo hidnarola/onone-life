@@ -15,6 +15,7 @@ import axios from "axios";
 import Moment from "moment";
 import { BASE_URL } from "../../constants/Constants";
 import { addNotes } from "../../redux/actions/hostManagementActions";
+import "./NotesModal.css";
 
 class NotesModal extends Component {
   state = {
@@ -53,12 +54,13 @@ class NotesModal extends Component {
             placeholder="Add notes here..!"
             value={this.state.notes}
           ></CTextarea>
-          <div style={{ display: "inline-block" }}>
-            <h6>Last Updated By: {this.props.notesBy.email}</h6>
-            <h6>
+
+          <h6 className="h-date">
+            Last Updated By: {this.props.notesBy.email}
+            <span>
               {Moment(this.props.notesBy.updatedAt).format("Do MMM YYYY H:mma")}
-            </h6>
-          </div>
+            </span>
+          </h6>
         </CModalBody>
         <CModalFooter>
           <CButton

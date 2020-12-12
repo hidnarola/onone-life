@@ -1,0 +1,12 @@
+h6.h-date {
+  font-size: 14px;
+  font-weight: 400;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+h6.h-date span {
+  margin-left: auto;
+}
