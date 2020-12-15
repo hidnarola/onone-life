@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 export default function PrivateRoute({ children, ...rest }) {
   const token = localStorage.getItem("AUTHTOKEN");
-  console.log("token: ", rest);
+  console.log("token: ", token);
 
   return (
     <Route

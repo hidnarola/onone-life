@@ -1,4 +1,6 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
 import {
   CBadge,
   CButton,
@@ -20,6 +22,14 @@ const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"));
 const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"));
 
 const Dashboard = () => {
+  const history = useHistory();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      console.log("isLoggedIn: ", isLoggedIn);
+      history.push("/login");
+    }
+  }, []);
   return (
     <>
       <WidgetsDropdown />

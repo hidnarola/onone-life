@@ -17,7 +17,6 @@ export const logIn = (email, password, token) => async (dispatch) => {
       password: password,
       googleRecaptchaToken: token,
     });
-    // debugger;
     console.log("res: ", res.data);
 
     if (res.data.token) {
@@ -30,15 +29,16 @@ export const logIn = (email, password, token) => async (dispatch) => {
     } else {
       dispatch({
         type: LOGIN_FAILED,
-        payload: { errorMessage: "Invalid Username/Password" },
+        payload: { errorMessage: res.message },
+        // payload: { errorMessage: "Invalid Username/Password" },
       });
     }
   } catch (error) {
-    // debugger;
-    console.log("Error", error);
+    // console.log("Error", error.response.data);
     dispatch({
       type: LOGIN_FAILED,
-      payload: { errorMessage: "Something went wrong" },
+      payload: { errorMessage: error.response.data.message },
+      // payload: { errorMessage: "Something went wrong" },
     });
   }
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Redirect, Link } from "react-router-dom";
+import { useHistory, Redirect /* Link */ } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -37,7 +37,6 @@ const Login = () => {
 
   const errorMessage = useSelector((state) => state.auth.errorMessage);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log("isLoggedIn: ", isLoggedIn);
 
   const onVerify = (invisible) => (recaptchaToken) => {
     // console.log("Token: ", recaptchaToken);
@@ -49,6 +48,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
+    console.log("isLoggedIn: ", isLoggedIn);
     return <Redirect to="/dashboard" />;
   }
   return (
@@ -60,8 +60,8 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1>Login</h1>
-                    <p className="text-muted">Sign In to your account</p>
+                    <h1 style={{ textAlign: "center" }}>Login</h1>
+                    {/* <p className="text-muted">Sign In to your account</p> */}
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -75,7 +75,7 @@ const Login = () => {
                       /> */}
                       <CInput
                         type="email"
-                        placeholder="Email Address"
+                        placeholder="Email address"
                         autoComplete="emailaddress"
                         onChange={(e) => setEmailAddress(e.target.value)}
                       />
@@ -109,7 +109,7 @@ const Login = () => {
                             className="form-check-label"
                             htmlFor="rememberMe"
                           >
-                            Remember Me
+                            Remember me
                           </CLabel>
                         </CFormGroup>
                       </CCol>
@@ -140,16 +140,16 @@ const Login = () => {
                     </CRow>
                     <CRow>
                       <CCol xs="12" className="mt-3">
-                        <Link to="/Dashboard">
-                          <CButton
-                            color="secondary"
-                            className="px-4 w-100 dark-btn"
-                            disabled={!emailAddress || !password}
-                            onClick={(e) => doLogin()}
-                          >
-                            Login
-                          </CButton>
-                        </Link>
+                        {/* <Link to="/dashboard"> */}
+                        <CButton
+                          color="secondary"
+                          className="px-4 w-100 dark-btn"
+                          disabled={!emailAddress || !password}
+                          onClick={(e) => doLogin()}
+                        >
+                          Login
+                        </CButton>
+                        {/* </Link> */}
                       </CCol>
                     </CRow>
                   </CForm>

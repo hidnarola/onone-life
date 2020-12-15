@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { CWidgetSimple, CRow, CCol, CSpinner } from "@coreui/react";
+import { CWidgetSimple, CRow, CCol, CSpinner, CButton } from "@coreui/react";
 import CKEditor from "ckeditor4-react";
+import { addTemplate } from "../../redux/actions/emailTemplatesActions";
 
 import Template from "./templates";
 
@@ -9,11 +10,21 @@ class EmailTemplatesManagement extends Component {
   state = {
     Showtemp: false,
     showEditor: false,
+    mailData: "",
+    type: "",
   };
 
   showForm = () => {
     this.setState({ Showtemp: !this.state.Showtemp });
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.addTemplateMessage !== prevProps.addTemplateMessage) {
+      if (this.props.addTemplate !== "") {
+        this.setState({ showEditor: false });
+      }
+    }
+  }
 
   render() {
     return (
@@ -36,7 +47,10 @@ class EmailTemplatesManagement extends Component {
                       header="New Joiner"
                       style={{ height: "73px" }}
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "new_joiner",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -46,7 +60,10 @@ class EmailTemplatesManagement extends Component {
                       style={{ height: "73px" }}
                       header="Welcome"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "welcome",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -55,7 +72,10 @@ class EmailTemplatesManagement extends Component {
                       style={{ height: "73px" }}
                       header="Email Verification"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "email_verification",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -64,7 +84,10 @@ class EmailTemplatesManagement extends Component {
                       style={{ height: "73px" }}
                       header="Abandoned Purchase"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "abandoned_purchase",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -75,7 +98,10 @@ class EmailTemplatesManagement extends Component {
                       style={{ height: "73px" }}
                       header="Offer"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "offer",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -84,7 +110,10 @@ class EmailTemplatesManagement extends Component {
                       style={{ height: "73px" }}
                       header="New Joiner but not purchased in week 1"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "new_joiner_but_not_purchased_in_week_1",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -92,9 +121,12 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="expert profile approval"
+                      header="Expert Profile Approval"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "expert_profile_approval",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -102,9 +134,12 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="expert profile rejection"
+                      header="Expert Profile Rejection"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "expert_profile_rejection",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -113,9 +148,12 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event listing approval"
+                      header="Event Listing Approval"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_listing_approval",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -123,27 +161,36 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event listing resubmission"
+                      header="Event Listing Resubmission"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_listing_resubmission",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event listing rejection"
+                      header="Event Listing Rejection"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_listing_rejection",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="payout request approval"
+                      header="payout Request Approval"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "payout_request_approval",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -153,9 +200,12 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="payout request submission"
+                      header="Payout Request Submission"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "payout_request_submission",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -275,14 +325,37 @@ class EmailTemplatesManagement extends Component {
           </div>
         )}
 
-        {this.state.showEditor ? <CKEditor data={` Add your post`} /> : null}
+        {this.state.showEditor ? (
+          <div>
+            <CKEditor
+              // editor={ClassicEditor}
+              data={` Add your post`}
+              onChange={(event) => {
+                const data = event.editor.getData();
+                console.log({ data });
+                this.setState({ mailData: data });
+              }}
+            />
+            <CButton
+              onClick={() => {
+                this.props.dispatch(
+                  addTemplate(this.state.type, this.state.mailData)
+                );
+                console.log("Save", this.state.mailData);
+              }}
+            >
+              Save
+            </CButton>
+          </div>
+        ) : null}
       </div>
     );
   }
 }
 const mapStateToProps = (state) => {
-  // console.log("State: ", state);
-  return {};
+  return {
+    addTemplateMessage: state.emailTemplates.addTemplateMessage,
+  };
 };
 
 export default connect(mapStateToProps)(EmailTemplatesManagement);

@@ -26,6 +26,7 @@ import Giftcards from "./views/Giftcards/Giftcards";
 import Verification from "./views/verification/Verification";
 import EducationAndCertifications from "./views/EducationAndCertifications/EducationAndCertifications";
 import IdVerification from "./views/IdVerification/IdVerification";
+import Dashboard from "./views/dashboard/Dashboard";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -95,6 +96,10 @@ class App extends Component {
               name="Home"
               render={(props) => <TheLayout {...props} />}
             />
+            <PrivateRoute exact path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
+
             <PrivateRoute exact path="/admin/membermanagement">
               <MemberManagement />
             </PrivateRoute>
