@@ -27,10 +27,14 @@ class IdVerificationModal extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      education: this.props.educationData,
-      certification: this.props.certificationData,
-    });
+    console.log("Props: ", this.props);
+    // this.props.dispatch(
+    //   getExpertData(this.props)
+    // );
+    // this.setState({
+    //   education: this.props.educationData,
+    //   certification: this.props.certificationData,
+    // });
   }
 
   async saveNotes(id, notes) {

@@ -1,6 +1,6 @@
 import React, { lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   CBadge,
   CButton,

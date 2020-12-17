@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { CWidgetSimple, CRow, CCol, CSpinner, CButton } from "@coreui/react";
+import {
+  CWidgetSimple,
+  CRow,
+  CCol,
+  CSpinner,
+  CButton,
+  CInput,
+  CLabel,
+  CFormGroup,
+} from "@coreui/react";
 import CKEditor from "ckeditor4-react";
-import { addTemplate } from "../../redux/actions/emailTemplatesActions";
+import {
+  addTemplate,
+  getTemplate,
+} from "../../redux/actions/emailTemplatesActions";
 
 import Template from "./templates";
 
@@ -12,11 +24,16 @@ class EmailTemplatesManagement extends Component {
     showEditor: false,
     mailData: "",
     type: "",
+    subject: "",
   };
 
   showForm = () => {
     this.setState({ Showtemp: !this.state.Showtemp });
   };
+
+  componentDidMount() {
+    // this.props.dispatch(getTemplate());
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.addTemplateMessage !== prevProps.addTemplateMessage) {
@@ -62,7 +79,7 @@ class EmailTemplatesManagement extends Component {
                       onClick={() => {
                         this.setState({
                           showEditor: !this.state.showEditor,
-                          type: "welcome",
+                          type: "welcome_email",
                         });
                       }}
                     ></CWidgetSimple>
@@ -80,6 +97,18 @@ class EmailTemplatesManagement extends Component {
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
+                    <CWidgetSimple
+                      style={{ height: "73px" }}
+                      header="Reset Password"
+                      onClick={() => {
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "reset_password",
+                        });
+                      }}
+                    ></CWidgetSimple>
+                  </CCol>
+                  {/* <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
                       header="Abandoned Purchase"
@@ -213,27 +242,36 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="payout request rejection"
+                      header="Payout Request Rejection"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "payout_request_rejection",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event listing rejection"
+                      header="Event Listing Rejection"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_listing_rejection",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="Account banned email"
+                      header="Account Banned Email"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "account_banned_email",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -242,9 +280,12 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="Event posted by expert to subscriber"
+                      header="Event posted by Expert to Subscriber"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_posted_by_expert_to_subscriber",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -252,27 +293,36 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event or session cancle"
+                      header="Event or Session Cancel"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_or_session_cancel",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event or session booking"
+                      header="Event or Session Booking"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_or_session_booking",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="Newew session request"
+                      header="New session request"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "new_session_request",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -281,9 +331,12 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="New followers subscribed email"
+                      header="New Followers Subscribed Email"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "new_followers_subscribed_email",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
@@ -291,30 +344,39 @@ class EmailTemplatesManagement extends Component {
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="subscribed followers event post"
+                      header="Subscribed Followers Event Post"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "subscribed_followers_event_post",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="event or session booking"
+                      header="Event or Session Booking"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "event_or_session_booking",
+                        });
                       }}
                     ></CWidgetSimple>
                   </CCol>
                   <CCol>
                     <CWidgetSimple
                       style={{ height: "73px" }}
-                      header="Newew session request"
+                      header="New Session Request"
                       onClick={() => {
-                        this.setState({ showEditor: !this.state.showEditor });
+                        this.setState({
+                          showEditor: !this.state.showEditor,
+                          type: "new_session_request",
+                        });
                       }}
                     ></CWidgetSimple>
-                  </CCol>
+                  </CCol> */}
                 </CRow>
               </>
             ) : (
@@ -327,6 +389,14 @@ class EmailTemplatesManagement extends Component {
 
         {this.state.showEditor ? (
           <div>
+            <CFormGroup>
+              <CLabel>Add Subject</CLabel>
+              <CInput
+                placeholder="Enter your subject here"
+                onChange={(e) => this.setState({ subject: e.target.value })}
+              />
+            </CFormGroup>
+
             <CKEditor
               // editor={ClassicEditor}
               data={` Add your post`}
@@ -337,9 +407,14 @@ class EmailTemplatesManagement extends Component {
               }}
             />
             <CButton
+              color="primary"
               onClick={() => {
                 this.props.dispatch(
-                  addTemplate(this.state.type, this.state.mailData)
+                  addTemplate(
+                    this.state.type,
+                    this.state.mailData,
+                    this.state.subject
+                  )
                 );
                 console.log("Save", this.state.mailData);
               }}

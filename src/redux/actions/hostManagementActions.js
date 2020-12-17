@@ -88,10 +88,8 @@ export const getExperts = (
 
   // console.log(res);
   const pages = Math.ceil(res.data.totalRecords / limit);
-  const total =
-    res.data.in_progress_request +
-    res.data.pending_request +
-    res.data.approved_request;
+  const total = res.data.in_progress_request + res.data.pending_request;
+  //  + res.data.approved_request;
   dispatch({
     type: GET_EXPERTS_DATA,
     payload: {

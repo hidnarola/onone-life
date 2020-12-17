@@ -113,7 +113,7 @@ class Verification extends Component {
                         >
                           Verify ID Verification
                         </CButton>
-                        <CButton
+                        {/* <CButton
                           variant="outline"
                           size="sm"
                           className="mr-2"
@@ -125,7 +125,7 @@ class Verification extends Component {
                           }
                         >
                           Verify Education and Certification
-                        </CButton>
+                        </CButton> */}
                       </td>
                     );
                   },

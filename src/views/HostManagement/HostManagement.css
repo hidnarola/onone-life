@@ -53,3 +53,22 @@ span.btn-export-list button {
 span.items-per-page {
   margin-left: auto;
 }
+
+@media (min-width: 1200px) and (max-width: 1350px) {
+  .hm-search span {
+    display: block;
+  }
+  .search-area span button {
+    margin-top: 17px;
+  }
+  .hm-search {
+    text-align: left;
+  }
+  .search-area select.custom-select {
+    min-width: 140px;
+    max-width: 140px;
+  }
+  .search-area {
+    justify-content: space-between;
+  }
+}

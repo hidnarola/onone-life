@@ -394,9 +394,9 @@ class HostManagement extends Component {
                     }}
                   >
                     <option value="">All ({this.props.totalRequest})</option>
-                    <option value="approved">
+                    {/* <option value="approved">
                       Approved ({this.props.approvedRequest})
-                    </option>
+                    </option> */}
                     <option value="in-progress">
                       In-progress ({this.props.inProgressRequest})
                     </option>
@@ -465,54 +465,62 @@ class HostManagement extends Component {
                     Export List as CSV
                   </CButton>
                 </span>
-                <span>Search </span>
-                <CInput
-                  className="mr-3 input-search-ad"
-                  type="search"
-                  placeholder="Enter here.."
-                  autoComplete="search"
-                  style={{ display: "inline-block", width: "100px" }}
-                  onChange={(e) => this.handleChangeSearch(e.target.value)}
-                />
-                <span>Start Date</span>
-                <CInput
-                  className="mr-3"
-                  type="date"
-                  placeholder="Enter here.."
-                  style={{ display: "inline-block", width: "150px" }}
-                  value={this.state.startDate}
-                  onChange={(e) =>
-                    this.handleChangeSearchByDate("startDate", e.target.value)
-                  }
-                />
-                <span>End Date</span>
-                <CInput
-                  className="mr-3"
-                  type="date"
-                  style={{ display: "inline-block", width: "150px" }}
-                  value={this.state.endDate}
-                  onChange={(e) =>
-                    this.handleChangeSearchByDate("endDate", e.target.value)
-                  }
-                />
-
-                <span className="items-per-page">Items per page: </span>
-                <CSelect
-                  custom
-                  size="sm"
-                  style={{ display: "inline-block", width: "100px" }}
-                  className="select-box"
-                  name="selectSm"
-                  value={this.state.currentPageSize}
-                  onChange={(e) => {
-                    this.onPaginationChange(Number(e.target.value));
-                  }}
-                >
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  <option value={15}>15</option>
-                  <option value={20}>20</option>
-                </CSelect>
+                <div className="hm-search">
+                  {" "}
+                  <span>Search </span>
+                  <CInput
+                    className="mr-3 input-search-ad"
+                    type="search"
+                    placeholder="Enter here.."
+                    autoComplete="search"
+                    style={{ display: "inline-block", width: "100px" }}
+                    onChange={(e) => this.handleChangeSearch(e.target.value)}
+                  />
+                </div>
+                <div className="hm-search">
+                  <span>Start Date</span>
+                  <CInput
+                    className="mr-3"
+                    type="date"
+                    placeholder="Enter here.."
+                    style={{ display: "inline-block", width: "150px" }}
+                    value={this.state.startDate}
+                    onChange={(e) =>
+                      this.handleChangeSearchByDate("startDate", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="hm-search">
+                  <span>End Date</span>
+                  <CInput
+                    className="mr-3"
+                    type="date"
+                    style={{ display: "inline-block", width: "150px" }}
+                    value={this.state.endDate}
+                    onChange={(e) =>
+                      this.handleChangeSearchByDate("endDate", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="hm-search">
+                  <span className="items-per-page">Items per page: </span>
+                  <CSelect
+                    custom
+                    size="sm"
+                    style={{ display: "inline-block", width: "100px" }}
+                    className="select-box"
+                    name="selectSm"
+                    value={this.state.currentPageSize}
+                    onChange={(e) => {
+                      this.onPaginationChange(Number(e.target.value));
+                    }}
+                  >
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                    <option value={20}>20</option>
+                  </CSelect>
+                </div>
               </div>
 
               <CDataTable
@@ -528,9 +536,9 @@ class HostManagement extends Component {
                   name: (item, index) => {
                     return (
                       <td className="py-2">
-                        <CLink to={`/admin/hostdetails/${item.userId}`}>
-                          {item.name}
-                        </CLink>
+                        {/* <CLink to={`/admin/hostdetails/${item.userId}`}> */}
+                        {item.name}
+                        {/* </CLink> */}
                       </td>
                     );
                   },
