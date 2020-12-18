@@ -7,6 +7,8 @@ export const ADD_NOTES = "ADD_NOTES";
 export const ADD_TEMPLATE = "ADD_TEMPLATE";
 export const GET_TEMPLATE = "GET_TEMPLATE";
 
+export const GET_VERIFICATION_LIST = "GET_VERIFICATION_LIST";
+
 export const GET_MEMBERS_DATA = "GET_MEMBERS_DATA";
 
 export const CLEAR_STORE = "CLEAR_STORE";

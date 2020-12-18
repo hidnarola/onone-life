@@ -3,20 +3,21 @@ import { connect } from "react-redux";
 import {
   CDataTable,
   CButton,
-  CLink,
+  // CLink,
   CSpinner,
   CPagination,
+  CSelect,
+  CInput,
 } from "@coreui/react";
-import { getExperts } from "../../redux/actions/hostManagementActions";
+import { getVerificationList } from "../../redux/actions/verificationsActions";
 import IdVerificationModal from "./IdVerificationModal";
+import "../HostManagement/HostManagement.css";
 
 const fields = [
   // { key: "userId", _style: { width: "2%" } },
   { key: "name", _style: { width: "auto" } },
   { key: "emailAddress", _style: { width: "auto" } },
   { key: "category", _style: { width: "auto" } },
-  //   { key: "signupDate", _style: { width: "auto" } },
-  //   { key: "submission", _style: { width: "auto" } },
   {
     key: "action",
     label: "Action",
@@ -38,9 +39,10 @@ class Verification extends Component {
     openIdVerification: false,
     educationData: {},
     certificationData: {},
+    searching: false,
   };
   componentDidMount() {
-    this.props.dispatch(getExperts(defaultPage, defaultPageSize));
+    this.props.dispatch(getVerificationList(defaultPage, defaultPageSize));
   }
 
   onNotesModalClose = () => {
@@ -49,16 +51,31 @@ class Verification extends Component {
 
   onPaginationChange = (limit) => {
     this.setState({ currentPageSize: limit });
-    this.props.dispatch(
-      getExperts(this.state.currentPage, limit, this.state.status)
-    );
+    this.props.dispatch(getVerificationList(this.state.currentPage, limit));
   };
 
   setActivePage = (i) => {
-    this.props.dispatch(
-      getExperts(i, this.state.currentPageSize, this.state.status)
-    );
+    this.props.dispatch(getVerificationList(i, this.state.currentPageSize));
     this.setState({ currentPage: i });
+  };
+
+  handleChangeSearch = (value) => {
+    this.setState({ searching: true });
+    if (value.length > 2) {
+      this.props.dispatch(
+        getVerificationList(
+          this.state.currentPage,
+          this.state.currentPageSize,
+          value
+        )
+      );
+    }
+    if (value.length < 2 && this.state.searching === true) {
+      this.props.dispatch(
+        getVerificationList(this.state.currentPage, this.state.currentPageSize)
+      );
+      this.setState({ searching: false });
+    }
   };
 
   render() {
@@ -69,23 +86,54 @@ class Verification extends Component {
         ) : (
           <div>
             <>
+              <div style={{ textAlign: "right" }} className="search-area">
+                <div className="hm-search">
+                  <span>Search </span>
+                  <CInput
+                    className="mr-3 input-search-ad"
+                    type="search"
+                    placeholder="Enter here.."
+                    autoComplete="search"
+                    style={{ display: "inline-block", width: "100px" }}
+                    onChange={(e) => this.handleChangeSearch(e.target.value)}
+                  />
+                </div>
+                <div className="hm-search">
+                  <span className="items-per-page">Items per page: </span>
+                  <CSelect
+                    custom
+                    size="sm"
+                    style={{ display: "inline-block", width: "100px" }}
+                    className="select-box"
+                    name="selectSm"
+                    value={this.state.currentPageSize}
+                    onChange={(e) => {
+                      this.onPaginationChange(Number(e.target.value));
+                    }}
+                  >
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                    <option value={20}>20</option>
+                  </CSelect>
+                </div>
+              </div>
               <CDataTable
-                items={this.props.hostData}
+                items={this.props.verificationData}
                 fields={fields}
-                // tableFilter
-                itemsPerPageSelect
-                itemsPerPage={defaultPageSize}
+                // itemsPerPageSelect
+                itemsPerPage={10}
                 hover
-                // sorter
+                loading={this.props.tableDataLoaded ? false : true}
                 pagination={false}
                 onPaginationChange={(e) => this.onPaginationChange(e)}
                 scopedSlots={{
                   name: (item, index) => {
                     return (
                       <td className="py-2">
-                        <CLink to={`/admin/hostdetails/${item.userId}`}>
-                          {item.name}
-                        </CLink>
+                        {/* <CLink to={`/admin/hostdetails/${item.userId}`}> */}
+                        {item.name}
+                        {/* </CLink> */}
                       </td>
                     );
                   },
@@ -103,29 +151,9 @@ class Verification extends Component {
                               `/admin/id-verification/${item.userId}`
                             )
                           }
-                          // onClick={() =>
-                          //   this.setState({
-                          //     openIdVerification: true,
-                          //     educationData: item.education,
-                          //     certificationData: item.certifications,
-                          //   })
-                          // }
                         >
                           Verify ID Verification
                         </CButton>
-                        {/* <CButton
-                          variant="outline"
-                          size="sm"
-                          className="mr-2"
-                          color="dark"
-                          onClick={() =>
-                            this.props.history.push(
-                              `/admin/education-and-certifications/${item.userId}`
-                            )
-                          }
-                        >
-                          Verify Education and Certification
-                        </CButton> */}
                       </td>
                     );
                   },
@@ -133,11 +161,14 @@ class Verification extends Component {
               />
             </>
             <div className={"mt-2"}>
-              <CPagination
-                activePage={this.state.currentPage}
-                pages={this.props.pages}
-                onActivePageChange={(i) => this.setActivePage(i)}
-              ></CPagination>
+              {this.props.verificationData &&
+              this.props.verificationData.length > 0 ? (
+                <CPagination
+                  activePage={this.state.currentPage}
+                  pages={this.props.pages}
+                  onActivePageChange={(i) => this.setActivePage(i)}
+                ></CPagination>
+              ) : null}
             </div>
           </div>
         )}
@@ -146,8 +177,6 @@ class Verification extends Component {
           <IdVerificationModal
             id={this.state.hostId}
             onClose={this.onNotesModalClose}
-            // educationData={this.state.educationData}
-            // certificationData={this.state.certificationData}
             page={defaultPage}
             pageSize={defaultPageSize}
           />
@@ -158,9 +187,9 @@ class Verification extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    hostData: state.hostManagement.hostData,
-    pages: state.hostManagement.pages,
-    tableDataLoaded: state.hostManagement.dataLoaded,
+    verificationData: state.verifications.verificationData,
+    pages: state.verifications.pages,
+    tableDataLoaded: state.verifications.dataLoaded,
   };
 };
 

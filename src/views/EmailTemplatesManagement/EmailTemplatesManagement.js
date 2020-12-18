@@ -13,7 +13,7 @@ import {
 import CKEditor from "ckeditor4-react";
 import {
   addTemplate,
-  getTemplate,
+  // getTemplate,
 } from "../../redux/actions/emailTemplatesActions";
 
 import Template from "./templates";
